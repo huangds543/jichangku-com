@@ -202,9 +202,8 @@ collections:
         name: "speed_test"
         widget: "object"
         required: false
-        hint: "每次实测后在这里更新；预览阶段请保持“预览示例数据”开启。"
+        hint: "每次实测后在这里更新测试日期、环境和节点结果。"
         fields:
-          - { label: "预览示例数据", name: "is_demo", widget: "boolean", default: true, hint: "上线前替换真实数据并关闭此开关。" }
           - { label: "测试日期", name: "date", widget: "string", required: false, hint: "例如：2026-08-09" }
           - { label: "测试时段", name: "period", widget: "string", required: false, hint: "例如：晚高峰 20:30" }
           - { label: "软件环境", name: "environment", widget: "string", required: false, hint: "例如：Clash Verge Rev v1.5.x" }
@@ -224,7 +223,6 @@ collections:
         required: false
         hint: "按实测平台逐项维护，页面会自动分为 AI 工具和流媒体两组。"
         fields:
-          - { label: "预览示例数据", name: "is_demo", widget: "boolean", default: true, hint: "上线前替换真实数据并关闭此开关。" }
           - { label: "测试日期", name: "date", widget: "string", required: false }
           - { label: "测试节点", name: "node", widget: "string", required: false }
           - { label: "测试工具", name: "tool", widget: "string", required: false }

@@ -94,7 +94,7 @@ unlock_test:
   date: "2026-08-09"
   node: "香港 IEPL 01"
   tool: "RegionRestrictionCheck"
-  note: "当前为本地预览示例数据，上线前请替换为真实测试结果。"
+  note: "测试结果仅供参考，实际表现可能随节点与网络环境变化。"
   items:
     - category: "AI 工具"
       platform: "ChatGPT"
