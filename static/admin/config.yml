@@ -13,8 +13,8 @@ local_backend:
 
 media_folder: "static/uploads"
 public_folder: "/uploads"
-site_url: "https://jichangku-com.vercel.app"
-display_url: "https://jichangku-com.vercel.app"
+site_url: "https://jichangku.com"
+display_url: "https://jichangku.com"
 locale: "zh_Hans"
 
 collections:
