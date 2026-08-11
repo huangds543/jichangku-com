@@ -1,0 +1,2 @@
+{{ $airport := . }}
+<span class="airport-avatar"><span class="airport-avatar-text">{{ $airport.Params.initial }}</span>{{ with $airport.Params.logo }}<img class="airport-avatar-logo" src="{{ . | relURL }}" alt="{{ $airport.Params.name }} LOGO" loading="lazy" decoding="async" onerror="this.hidden=true">{{ end }}</span>

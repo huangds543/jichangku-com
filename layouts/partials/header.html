@@ -1,0 +1,17 @@
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="/" aria-label="返回首页"><span class="brand-mark has-logo"><img src="/uploads/jichangku-logo-v4-brand.png" alt="" width="34" height="34"></span><span>机场库</span></a>
+    <nav class="nav-links" aria-label="主导航">
+      <a class="nav-link{{ if eq .RelPermalink "/" }} active{{ end }}" href="/">首页</a>
+      <div class="nav-cluster" role="group" aria-label="机场核心功能">
+        <a class="nav-link nav-status{{ if hasPrefix .RelPermalink "/airports/" }} active{{ end }}" href="/airports/"><span class="nav-status-dot dot-teal" aria-hidden="true"></span>机场库</a>
+        <a class="nav-link nav-status{{ if hasPrefix .RelPermalink "/free-node/" }} active{{ end }}" href="/free-node/"><span class="nav-status-dot dot-amber" aria-hidden="true"></span>免费节点</a>
+        <a class="nav-link nav-status{{ if hasPrefix .RelPermalink "/compare/" }} active{{ end }}" href="/compare/"><span class="nav-status-dot dot-rose" aria-hidden="true"></span>机场对比</a>
+      </div>
+      <a class="nav-link{{ if hasPrefix .RelPermalink "/faq/" }} active{{ end }}" href="/faq/">问题库</a>
+      <a class="nav-link{{ if hasPrefix .RelPermalink "/blog/" }} active{{ end }}" href="/blog/">博客</a>
+      <a class="nav-link{{ if hasPrefix .RelPermalink "/downloads/" }} active{{ end }}" href="/downloads/">软件下载</a>
+    </nav>
+    {{ with hugo.Data.site.tg_url }}<a class="nav-cta" href="{{ . }}" target="_blank" rel="noopener">订阅 TG 频道</a>{{ else }}<button class="nav-cta" type="button" data-toast="TG 频道即将开放">订阅 TG 频道</button>{{ end }}
+  </div>
+</header>

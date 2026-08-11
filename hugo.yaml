@@ -1,0 +1,65 @@
+baseURL: "https://jichangku.com/"
+relativeURLs: true
+title: "机场库"
+locale: "zh-CN"
+defaultContentLanguage: "zh-cn"
+hasCJKLanguage: true
+enableRobotsTXT: true
+enableGitInfo: false
+summaryLength: 120
+disableKinds: ["taxonomy", "term"]
+
+permalinks:
+  airports: "/airports/:slug/"
+  guides: "/guides/:slug/"
+  blog: "/blog/:slug/"
+
+outputs:
+  home: [HTML, RSS]
+  section: [HTML, RSS]
+
+sitemap:
+  changefreq: "weekly"
+  priority: 0.7
+  filename: "sitemap.xml"
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+minify:
+  minifyOutput: true
+
+params:
+  siteName: "机场库"
+  description: "机场库提供机场推荐、免费试用、套餐价格、线路协议与流媒体解锁对比，帮助用户快速选择适合自己的机场。"
+  author: "机场库编辑部"
+  logo: "/uploads/jichangku-logo-v4-brand.png"
+  defaultImage: "/uploads/jichangku-logo-v4-brand.png"
+  tgUrl: ""
+  legalNotice: "本站仅提供公开信息整理与选择参考，套餐、价格和服务状态请以对应机场官网为准。"
+
+menus:
+  main:
+    - name: "首页"
+      pageRef: "/"
+      weight: 10
+    - name: "机场库"
+      pageRef: "/airports"
+      weight: 20
+    - name: "免费节点"
+      pageRef: "/free-node"
+      weight: 30
+    - name: "机场对比"
+      pageRef: "/compare"
+      weight: 35
+    - name: "问题库"
+      pageRef: "/faq"
+      weight: 40
+    - name: "博客"
+      pageRef: "/blog"
+      weight: 50
+    - name: "软件下载"
+      pageRef: "/downloads"
+      weight: 60

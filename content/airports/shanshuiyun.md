@@ -1,0 +1,157 @@
+---
+title: "山水云怎么样？"
+name: "山水云"
+slug: "shanshuiyun"
+date: 2026-08-07
+updated: "2026-08-10"
+rank: 8
+initial: "山"
+status: "正常运营"
+protocol: "中转+直连 / 三网优化线路"
+price: 15
+price_display: "￥15.00"
+streaming: "GPT、TikTok 等主流平台解锁"
+advantage: "普通线路与三网优化 Pro 线路可选"
+summary: "提供中转加直连与三网优化线路，覆盖周期、付费试用和不限时套餐。"
+rating: 5
+trial: false
+premium: true
+media: true
+website: "https://ss2.byvvcsx.com/#/register?code=Mjn7fxOj"
+verification_type: "官网与公开套餐资料核对"
+test_status: "套餐资料已核验，暂未进行独立线路测试"
+trial_note: "提供 ￥15 的 10 GB 付费试用套餐，但该套餐不能复购"
+refund_note: "官网注明特殊商品不支持退款"
+support_note: "提供客服、工单与 24 小时响应渠道，具体响应时间以官网为准"
+plans:
+  - category: "周期套餐"
+    name: "64G / 轻量套餐"
+    price: "￥88.00 / 年"
+    quota: "每月 64 GB"
+    validity: "仅年付；中转+直连节点、3 台设备、全球多地区解锁"
+  - category: "周期套餐"
+    name: "128G / 轻量套餐"
+    price: "￥88.00 / 半年"
+    quota: "每月 128 GB"
+    validity: "半年或年付；中转+直连节点、3 台设备、全球多地区解锁"
+  - category: "周期套餐"
+    name: "256G / 轻量套餐"
+    price: "￥75.00 / 季度"
+    quota: "每月 256 GB"
+    validity: "季度、半年或年付；中转+直连节点、5 台设备"
+  - category: "周期套餐"
+    name: "100G / 月·琴"
+    price: "￥15.00 / 月"
+    quota: "每月 100 GB"
+    validity: "月付至 2 年付可选；中转+直连节点、3 台设备"
+  - category: "周期套餐"
+    name: "200G / 月·棋"
+    price: "￥25.00 / 月"
+    quota: "每月 200 GB"
+    validity: "月付至 2 年付可选；中转+直连节点、5 台设备"
+  - category: "周期套餐"
+    name: "500G / 月·书"
+    price: "￥50.00 / 月"
+    quota: "每月 500 GB"
+    validity: "月付、季度、半年或年付；中转+直连节点、5 台设备"
+  - category: "周期套餐"
+    name: "10G 付费试用"
+    price: "￥15.00 / 月"
+    quota: "10 GB 试用流量"
+    validity: "仅可购买一次；三网优化高端线路、1 台设备"
+  - category: "周期套餐"
+    name: "100G / 月·琴 Pro"
+    price: "￥30.00 / 月"
+    quota: "每月 100 GB"
+    validity: "月付至 2 年付可选；三网优化高端线路、2 台设备"
+  - category: "周期套餐"
+    name: "200G / 月·棋 Pro"
+    price: "￥60.00 / 月"
+    quota: "每月 200 GB"
+    validity: "月付至 2 年付可选；三网优化高端线路、2 台设备"
+  - category: "周期套餐"
+    name: "500G / 月·书 Pro"
+    price: "￥150.00 / 月"
+    quota: "每月 500 GB"
+    validity: "月付、季度、半年或年付；三网优化高端线路、5 台设备"
+  - category: "永久流量包"
+    name: "100G / 不限时·梅兰"
+    price: "￥150.00"
+    quota: "永久 100 GB"
+    validity: "一次性商品，重复购买不叠加；中转+直连节点、3 台设备"
+  - category: "永久流量包"
+    name: "100G / 不限时·梅兰 Pro"
+    price: "￥320.00"
+    quota: "永久 100 GB"
+    validity: "一次性商品，重复购买不叠加；三网优化高端线路、2 台设备"
+speed_test:
+  is_demo: true
+  date: "2026-08-09"
+  period: "晚高峰 20:30"
+  environment: "Clash Verge Rev v1.5.x"
+  tool: "Speedtest.net"
+  nodes:
+    - name: "香港 IEPL 01"
+      latency: 56
+      download: 64.5
+      packet_loss: 0
+    - name: "日本东京专线"
+      latency: 102
+      download: 48.7
+      packet_loss: 0
+    - name: "美国洛杉矶优化"
+      latency: 166
+      download: 22.3
+      packet_loss: 0.5
+unlock_test:
+  is_demo: true
+  date: "2026-08-09"
+  node: "香港 IEPL 01"
+  tool: "RegionRestrictionCheck"
+  note: "当前为本地预览示例数据，上线前请替换为真实测试结果。"
+  items:
+    - category: "AI 工具"
+      platform: "ChatGPT"
+      status: "unlocked"
+    - category: "AI 工具"
+      platform: "Claude"
+      status: "region"
+    - category: "AI 工具"
+      platform: "Gemini"
+      status: "unsupported"
+    - category: "流媒体"
+      platform: "Netflix"
+      status: "unlocked"
+    - category: "流媒体"
+      platform: "Disney+"
+      status: "unlocked"
+    - category: "流媒体"
+      platform: "YouTube"
+      status: "unlocked"
+    - category: "流媒体"
+      platform: "HBO Max"
+      status: "region"
+    - category: "流媒体"
+      platform: "TikTok"
+      status: "unlocked"
+    - category: "流媒体"
+      platform: "Spotify"
+      status: "unlocked"
+best_for: "需要 GPT 与 TikTok 解锁、多地区节点，并希望在普通线路和三网优化线路间选择的用户"
+purchase_advice: "普通用户可先选 ￥15 的 100 GB 月付套餐；想测试 Pro 线路可购买一次 10 GB 付费试用；对三网优化有明确需求再选择 Pro 套餐。"
+pros: ["中转+直连与三网优化 Pro 两类线路可选", "支持 GPT、TikTok 等主流平台和全球多地区解锁", "提供客服、工单与 24 小时响应渠道"]
+cons: ["付费试用套餐仅可购买一次", "不限时套餐重复购买流量不叠加", "官网注明特殊商品不支持退款"]
+faqs:
+  - question: "山水云适合什么用户？"
+    answer: "适合需要 GPT、TikTok 等平台解锁、全球多地区节点，并希望按需求选择普通中转直连或三网优化 Pro 线路的用户。"
+  - question: "山水云支持免费试用吗？"
+    answer: "当前没有免费试用；官网提供 ￥15 的 10 GB 付费试用套餐，只能购买一次。"
+  - question: "普通套餐和 Pro 套餐有什么区别？"
+    answer: "普通套餐使用中转+直连节点；Pro 套餐标注三网优化高端线路，价格更高，设备上限也因套餐而异。"
+  - question: "不限时套餐能重复购买叠加吗？"
+    answer: "不能。官网注明不限时套餐属于一次性商品，重复购买流量不叠加，并且特殊商品不支持退款。"
+seo_title: "山水云怎么样？15元100GB月付、三网优化Pro线路、付费试用与不限时套餐购买建议详细评测"
+seo_description: "山水云怎么样？本页整理15元100GB至150元500GB月付套餐、64GB至256GB轻量周期套餐、15元10GB付费试用，以及150元和320元永久100GB不限时套餐。对比中转直连、三网优化Pro线路、1至5台设备、GPT与TikTok解锁、全球多地区节点和不退款规则，帮助普通与高线路需求用户选择。"
+---
+
+山水云提供普通中转加直连线路和三网优化 Pro 线路，套餐覆盖轻量周期、常规月付、一次性付费试用及不限时流量。所有截图所示套餐均标注支持 GPT、TikTok 等主流平台和全球多地区解锁，并提供客服、工单与 24 小时响应渠道。购买前需要注意：10 GB 试用套餐只能购买一次，不限时套餐重复购买流量不叠加，且特殊商品不支持退款。

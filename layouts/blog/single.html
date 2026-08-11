@@ -1,0 +1,24 @@
+{{ define "main" }}
+{{ $current := . }}
+{{ $allPosts := sort (where site.RegularPages "Section" "blog") "Date" "desc" }}
+{{ $related := slice }}
+{{ $relatedURLs := slice }}
+{{ range $allPosts }}{{ if and (ne .RelPermalink $current.RelPermalink) (eq (.Params.category | default "使用教程") ($current.Params.category | default "使用教程")) }}{{ $related = $related | append . }}{{ $relatedURLs = $relatedURLs | append .RelPermalink }}{{ end }}{{ end }}
+{{ if lt (len $related) 3 }}{{ range $allPosts }}{{ if and (ne .RelPermalink $current.RelPermalink) (not (in $relatedURLs .RelPermalink)) }}{{ $tagMatch := false }}{{ range (.Params.tags | default (slice)) }}{{ if in ($current.Params.tags | default (slice)) . }}{{ $tagMatch = true }}{{ end }}{{ end }}{{ if $tagMatch }}{{ $related = $related | append . }}{{ $relatedURLs = $relatedURLs | append .RelPermalink }}{{ end }}{{ end }}{{ end }}{{ end }}
+{{ if lt (len $related) 3 }}{{ range $allPosts }}{{ if and (ne .RelPermalink $current.RelPermalink) (not (in $relatedURLs .RelPermalink)) }}{{ $related = $related | append . }}{{ $relatedURLs = $relatedURLs | append .RelPermalink }}{{ end }}{{ end }}{{ end }}
+{{ $related = first 3 $related }}
+
+<section class="page-hero blog-article-hero"><div class="container blog-article-hero-grid"><div class="blog-article-hero-content"><div class="breadcrumb"><a href="/">首页</a><span>/</span><a href="/blog/">博客</a><span>/</span><span>{{ .Title }}</span></div><span class="eyebrow">机场库博客</span><h1>{{ .Title }}</h1><p>{{ .Params.description }}</p><div class="article-meta"><span>机场库编辑部</span><span>发布于 {{ .Date.Format "2006-01-02" }}</span><span>约 {{ .ReadingTime }} 分钟阅读</span></div><div class="article-taxonomy"><span class="blog-category-chip">{{ .Params.category | default "使用教程" }}</span>{{ range .Params.tags }}<span>{{ . }}</span>{{ end }}</div></div><div class="blog-article-hero-spacer" aria-hidden="true"></div></div></section>
+
+<main class="blog-article-page container">
+  <details class="blog-mobile-toc"><summary>本文目录 <span>展开查看</span></summary><div>{{ .TableOfContents }}</div></details>
+  <div class="blog-article-layout">
+    <article class="blog-article-content"><div class="prose">{{ .Content }}</div></article>
+    <aside class="blog-toc" aria-label="本文目录"><strong>本文目录</strong>{{ .TableOfContents }}</aside>
+  </div>
+
+  <div class="guide-next blog-guide-next"><div class="blog-guide-copy"><strong>继续浏览机场库</strong><p>根据使用场景查看选购指南，或者直接比较机场价格与试用条件。</p></div><div><a class="btn btn-primary" href="/airports/">查看机场库</a><a class="btn btn-secondary" href="/guides/">查看选购指南</a></div></div>
+
+  {{ if gt (len $related) 0 }}<section class="related-posts" aria-labelledby="related-posts-title"><div class="related-posts-head"><div><span class="eyebrow">继续阅读</span><h2 id="related-posts-title">相关文章</h2></div><a class="text-link" href="/blog/">查看全部博客</a></div><div class="related-post-grid">{{ range $related }}<article><a href="{{ .RelPermalink }}"><div class="blog-card-taxonomy"><span class="blog-category-chip">{{ .Params.category | default "使用教程" }}</span>{{ range first 2 (.Params.tags | default (slice)) }}<span>{{ . }}</span>{{ end }}</div><h3>{{ .Title }}</h3><p>{{ .Params.description }}</p><div class="related-post-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time><span>约 {{ .ReadingTime }} 分钟</span></div></a></article>{{ end }}</div></section>{{ end }}
+</main>
+{{ end }}

@@ -1,0 +1,363 @@
+backend:
+  name: github
+  repo: jichangku/jichangku-com
+  branch: main
+  base_url: https://jichangku.com
+  auth_endpoint: api/auth
+
+# 本地开发时由 Decap Proxy 接管，直接读写当前项目文件，无需 GitHub 登录。
+# 正式域名不会启用该配置，仍使用上方 GitHub OAuth。
+local_backend:
+  url: http://127.0.0.1:8081/api/v1
+  allowed_hosts: [127.0.0.1, localhost]
+
+media_folder: "static/uploads"
+public_folder: "/uploads"
+site_url: "https://jichangku.com"
+display_url: "https://jichangku.com"
+locale: "zh_Hans"
+
+collections:
+  - name: "site_settings"
+    label: "首页与友情链接"
+    files:
+      - name: "homepage"
+        label: "首页设置"
+        file: "data/site.yaml"
+        fields:
+          - { label: "首页核验提示", name: "announcement", widget: "string" }
+          - { label: "首页主标题", name: "hero_title", widget: "string" }
+          - { label: "首页主标题强调词", name: "hero_emphasis", widget: "string" }
+          - { label: "首页介绍", name: "hero_description", widget: "text" }
+          - { label: "最后核验日期", name: "last_verified", widget: "string" }
+          - { label: "Telegram 频道链接", name: "tg_url", widget: "string", required: false, hint: "留空时前台显示即将开放提示" }
+          - { label: "TG 推送说明", name: "tg_note", widget: "string" }
+          - { label: "页脚免责声明", name: "legal_notice", widget: "text" }
+          - label: "首页机场推荐位"
+            name: "featured_airports"
+            widget: "object"
+            hint: "从机场管理中选择首页各推荐位置展示的机场；名称、价格和详情链接会自动同步。"
+            fields:
+              - { label: "首屏－入门低价", name: "quick_budget", widget: "relation", collection: "airports", search_fields: ["name", "slug"], value_field: "slug", display_fields: ["name"] }
+              - { label: "首屏－全能稳定", name: "quick_stable", widget: "relation", collection: "airports", search_fields: ["name", "slug"], value_field: "slug", display_fields: ["name"] }
+              - { label: "首屏－商务办公", name: "quick_business", widget: "relation", collection: "airports", search_fields: ["name", "slug"], value_field: "slug", display_fields: ["name"] }
+              - { label: "场景－AI 与流媒体", name: "scenario_ai_media", widget: "relation", collection: "airports", search_fields: ["name", "slug"], value_field: "slug", display_fields: ["name"] }
+              - { label: "场景－外贸与商务", name: "scenario_business", widget: "relation", collection: "airports", search_fields: ["name", "slug"], value_field: "slug", display_fields: ["name"] }
+              - { label: "场景－预算入门", name: "scenario_budget", widget: "relation", collection: "airports", search_fields: ["name", "slug"], value_field: "slug", display_fields: ["name"] }
+              - { label: "场景－高稳定需求", name: "scenario_stability", widget: "relation", collection: "airports", search_fields: ["name", "slug"], value_field: "slug", display_fields: ["name"] }
+          - label: "友情链接"
+            name: "friend_links"
+            widget: "list"
+            fields:
+              - { label: "名称", name: "name", widget: "string" }
+              - { label: "网址", name: "url", widget: "string", required: false }
+
+  - name: "fixed_page_seo"
+    label: "固定页面 SEO"
+    files:
+      - name: "home_seo"
+        label: "首页 SEO"
+        file: "content/_index.md"
+        fields:
+          - { label: "页面标题", name: "title", widget: "string" }
+          - { label: "SEO 标题", name: "seo_title", widget: "string", hint: "首页不会追加品牌名，必须写满 50–60 个字符。" }
+          - { label: "SEO 描述", name: "seo_description", widget: "text", hint: "必须写 150–160 个字符，并概括首页主要内容。" }
+      - name: "airports_index_seo"
+        label: "机场大全 SEO"
+        file: "content/airports/_index.md"
+        fields:
+          - { label: "页面标题", name: "title", widget: "string" }
+          - { label: "页面摘要", name: "description", widget: "text" }
+          - { label: "SEO 标题", name: "seo_title", widget: "string", hint: "前台会自动加上｜机场库，最终标题必须为 50–60 个字符。" }
+          - { label: "SEO 描述", name: "seo_description", widget: "text", hint: "必须写 150–160 个字符，并避免与其他页面重复。" }
+      - name: "guides_index_seo"
+        label: "选购指南首页 SEO"
+        file: "content/guides/_index.md"
+        fields:
+          - { label: "页面标题", name: "title", widget: "string" }
+          - { label: "页面摘要", name: "description", widget: "text" }
+          - { label: "SEO 标题", name: "seo_title", widget: "string", hint: "前台会自动加上｜机场库，最终标题必须为 50–60 个字符。" }
+          - { label: "SEO 描述", name: "seo_description", widget: "text", hint: "必须写 150–160 个字符，并避免与其他页面重复。" }
+      - name: "blog_index_seo"
+        label: "博客首页 SEO"
+        file: "content/blog/_index.md"
+        fields:
+          - { label: "页面标题", name: "title", widget: "string" }
+          - { label: "页面摘要", name: "description", widget: "text" }
+          - { label: "SEO 标题", name: "seo_title", widget: "string", hint: "前台会自动加上｜机场库，最终标题必须为 50–60 个字符。" }
+          - { label: "SEO 描述", name: "seo_description", widget: "text", hint: "必须写 150–160 个字符，并避免与其他页面重复。" }
+      - name: "faq_index_seo"
+        label: "问题库首页 SEO"
+        file: "content/faq/_index.md"
+        fields:
+          - { label: "页面标题", name: "title", widget: "string" }
+          - { label: "页面摘要", name: "description", widget: "text" }
+          - { label: "SEO 标题", name: "seo_title", widget: "string", hint: "前台会自动加上｜机场库，最终标题必须为 50–60 个字符。" }
+          - { label: "SEO 描述", name: "seo_description", widget: "text", hint: "必须写 150–160 个字符，概括问题库覆盖范围和使用价值。" }
+      - name: "downloads_index_seo"
+        label: "软件下载 SEO"
+        file: "content/downloads/_index.md"
+        fields:
+          - { label: "页面标题", name: "title", widget: "string" }
+          - { label: "页面摘要", name: "description", widget: "text" }
+          - { label: "SEO 标题", name: "seo_title", widget: "string", hint: "前台会自动加上｜机场库，最终标题必须为 50–60 个字符。" }
+          - { label: "SEO 描述", name: "seo_description", widget: "text", hint: "必须写 150–160 个字符，并避免与其他页面重复。" }
+      - name: "compare_seo"
+        label: "机场对比 SEO"
+        file: "content/compare.md"
+        fields:
+          - { label: "页面标题", name: "title", widget: "string" }
+          - { label: "页面类型", name: "type", widget: "hidden", default: "compare" }
+          - { label: "页面布局", name: "layout", widget: "hidden", default: "single" }
+          - { label: "页面摘要", name: "description", widget: "text" }
+          - { label: "SEO 标题", name: "seo_title", widget: "string", hint: "前台会自动加上｜机场库，最终标题必须为 50–60 个字符。" }
+          - { label: "SEO 描述", name: "seo_description", widget: "text", hint: "必须写 150–160 个字符，并概括对比维度与使用价值。" }
+
+  - name: "free_node_settings"
+    label: "免费节点页面"
+    files:
+      - name: "free_node"
+        label: "免费节点内容与订阅"
+        file: "content/free-node.md"
+        fields:
+          - { label: "页面标题", name: "title", widget: "string" }
+          - { label: "页面类型", name: "type", widget: "hidden", default: "free-node" }
+          - { label: "页面布局", name: "layout", widget: "hidden", default: "single" }
+          - { label: "发布日期", name: "date", widget: "datetime" }
+          - { label: "最后更新日期", name: "updated", widget: "string", hint: "例如：2026-08-09" }
+          - { label: "更新状态", name: "update_status", widget: "string", hint: "例如：今日已更新" }
+          - { label: "页面介绍", name: "description", widget: "text" }
+          - { label: "SEO 标题", name: "seo_title", widget: "string", hint: "前台会自动加上｜机场库，最终标题建议保持 50–60 个字符。" }
+          - { label: "SEO 描述", name: "seo_description", widget: "text", hint: "建议写 150–160 个字符，并包含免费节点、Clash、V2Ray、订阅和安全提醒。" }
+          - { label: "通用订阅链接", name: "universal_url", widget: "string", required: false, hint: "适用于小火箭、v2rayN、v2rayNG 等客户端。" }
+          - { label: "Clash 订阅链接", name: "clash_url", widget: "string", required: false, hint: "适用于 Clash Verge、Clash Meta 等客户端。" }
+          - { label: "备用通用订阅", name: "backup_universal_url", widget: "string", required: false }
+          - { label: "备用 Clash 订阅", name: "backup_clash_url", widget: "string", required: false }
+          - { label: "节点来源说明", name: "source_note", widget: "text" }
+          - { label: "TG 模块标题", name: "tg_heading", widget: "string" }
+          - { label: "主推机场", name: "primary_airport", widget: "relation", collection: "airports", search_fields: ["name", "slug"], value_field: "slug", display_fields: ["name"] }
+          - { label: "次推机场", name: "secondary_airport", widget: "relation", collection: "airports", search_fields: ["name", "slug"], value_field: "slug", display_fields: ["name"] }
+          - { label: "安全提醒", name: "warnings", widget: "list", field: { label: "提醒内容", name: "warning", widget: "string" } }
+          - label: "常见问题"
+            name: "faqs"
+            widget: "list"
+            fields:
+              - { label: "问题", name: "question", widget: "string" }
+              - { label: "答案", name: "answer", widget: "text" }
+
+  - name: "airports"
+    label: "机场管理"
+    folder: "content/airports"
+    create: true
+    slug: "{{slug}}"
+    summary: "#{{rank}} · {{name}} · {{price_display}}"
+    sortable_fields: ["rank", "name", "updated"]
+    fields:
+      - { label: "页面标题", name: "title", widget: "string", hint: "例如：寰宇云怎么样？" }
+      - { label: "机场名称", name: "name", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string", pattern: ["^[a-z0-9-]+$", "仅使用小写英文、数字和短横线"] }
+      - { label: "收录日期", name: "date", widget: "datetime", hint: "该机场首次收录进机场库的日期，显示在详情页右侧。" }
+      - { label: "最后更新日期", name: "updated", widget: "string", hint: "最近一次更新或核验机场资料的日期，显示在详情页左侧。" }
+      - { label: "排序", name: "rank", widget: "number", value_type: "int", min: 1 }
+      - { label: "机场 LOGO", name: "logo", widget: "image", required: false, hint: "可上传 PNG、WebP、JPG、SVG 或 ICO；建议使用正方形透明背景图片。未上传时显示下方头像文字。" }
+      - { label: "头像文字", name: "initial", widget: "string", hint: "未上传 LOGO 或图片加载失败时显示，建议填写机场名称的首字。" }
+      - { label: "运营状态", name: "status", widget: "select", options: ["正常运营", "暂停注册", "维护中", "疑似失联", "已停止运营"] }
+      - { label: "核心协议", name: "protocol", widget: "string" }
+      - { label: "最低月费数字", name: "price", widget: "number", value_type: "float", min: 0 }
+      - { label: "价格显示", name: "price_display", widget: "string", hint: "例如：￥15.00" }
+      - { label: "最低价格单位", name: "price_unit", widget: "string", required: false, hint: "月付套餐可留空；一次性不限时套餐填写：一次性" }
+      - { label: "流媒体支持", name: "streaming", widget: "string" }
+      - { label: "特色优势", name: "advantage", widget: "string" }
+      - { label: "综合评价", name: "summary", widget: "text", hint: "显示位置：详情页标题下方、下方综合评价模块以及对比页综合评价。" }
+      - { label: "推荐指数", name: "rating", widget: "number", value_type: "float", min: 0, max: 5, step: 0.1 }
+      - { label: "支持试用", name: "trial", widget: "boolean", default: false }
+      - { label: "高端专线", name: "premium", widget: "boolean", default: false }
+      - { label: "流媒体优先", name: "media", widget: "boolean", default: false }
+      - { label: "官网/注册链接", name: "website", widget: "string", required: false }
+      - { label: "试用说明", name: "trial_note", widget: "string", required: false }
+      - label: "套餐列表"
+        name: "plans"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "套餐分类", name: "category", widget: "select", options: ["周期套餐", "永久流量包", "日享套餐", "定制套餐"] }
+          - { label: "套餐名称", name: "name", widget: "string" }
+          - { label: "价格", name: "price", widget: "string", hint: "例如：￥24.00" }
+          - { label: "流量或期限", name: "quota", widget: "string", hint: "例如：100 GB，或 30 天 / 总流量 1800 GB" }
+          - { label: "有效期与重置规则", name: "validity", widget: "string" }
+      - label: "测速表现"
+        name: "speed_test"
+        widget: "object"
+        required: false
+        hint: "每次实测后在这里更新；预览阶段请保持“预览示例数据”开启。"
+        fields:
+          - { label: "预览示例数据", name: "is_demo", widget: "boolean", default: true, hint: "上线前替换真实数据并关闭此开关。" }
+          - { label: "测试日期", name: "date", widget: "string", required: false, hint: "例如：2026-08-09" }
+          - { label: "测试时段", name: "period", widget: "string", required: false, hint: "例如：晚高峰 20:30" }
+          - { label: "软件环境", name: "environment", widget: "string", required: false, hint: "例如：Clash Verge Rev v1.5.x" }
+          - { label: "测速工具", name: "tool", widget: "string", required: false, hint: "例如：Speedtest.net" }
+          - label: "测试节点"
+            name: "nodes"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "节点名称", name: "name", widget: "string" }
+              - { label: "延迟（ms）", name: "latency", widget: "number", value_type: "int", min: 0 }
+              - { label: "下载速度（MB/s）", name: "download", widget: "number", value_type: "float", min: 0 }
+              - { label: "丢包率（%）", name: "packet_loss", widget: "number", value_type: "float", min: 0, max: 100 }
+      - label: "流媒体与 AI 解锁能力"
+        name: "unlock_test"
+        widget: "object"
+        required: false
+        hint: "按实测平台逐项维护，页面会自动分为 AI 工具和流媒体两组。"
+        fields:
+          - { label: "预览示例数据", name: "is_demo", widget: "boolean", default: true, hint: "上线前替换真实数据并关闭此开关。" }
+          - { label: "测试日期", name: "date", widget: "string", required: false }
+          - { label: "测试节点", name: "node", widget: "string", required: false }
+          - { label: "测试工具", name: "tool", widget: "string", required: false }
+          - { label: "补充说明", name: "note", widget: "text", required: false }
+          - label: "平台测试结果"
+            name: "items"
+            widget: "list"
+            required: false
+            fields:
+              - { label: "分类", name: "category", widget: "select", options: ["AI 工具", "流媒体"] }
+              - { label: "平台名称", name: "platform", widget: "string" }
+              - label: "解锁状态"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "已解锁", value: "unlocked" }
+                  - { label: "仅特定区", value: "region" }
+                  - { label: "不支持", value: "unsupported" }
+                  - { label: "暂未测试", value: "untested" }
+      - { label: "适合人群", name: "best_for", widget: "string", hint: "显示位置：详情页首屏的适合人群，以及机场大全的适合用途。" }
+      - { label: "购买建议", name: "purchase_advice", widget: "text", hint: "显示位置：详情页首屏适合人群下方，例如建议先试用、月付或核对哪些规则。" }
+      - { label: "核心优势", name: "pros", widget: "list" }
+      - { label: "注意事项", name: "cons", widget: "list" }
+      - label: "常见问题"
+        name: "faqs"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "问题", name: "question", widget: "string" }
+          - { label: "答案", name: "answer", widget: "text" }
+      - { label: "SEO 标题", name: "seo_title", widget: "string", required: false, hint: "前台会自动加上｜机场库，最终标题必须为 50–60 个字符。" }
+      - { label: "SEO 描述", name: "seo_description", widget: "text", required: false, hint: "请写 150–160 个字符，准确概括价格、协议、用途和购买建议。" }
+      - { label: "Canonical", name: "canonical", widget: "string", required: false }
+      - { label: "OG 图片", name: "og_image", widget: "image", required: false }
+      - { label: "详细说明", name: "body", widget: "markdown" }
+
+  - name: "guides"
+    label: "选购指南文章"
+    folder: "content/guides"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string" }
+      - { label: "发布日期", name: "date", widget: "datetime" }
+      - { label: "摘要", name: "description", widget: "text" }
+      - { label: "草稿", name: "draft", widget: "boolean", default: false }
+      - { label: "SEO 标题", name: "seo_title", widget: "string", required: false, hint: "前台会自动加上｜机场库，最终标题必须为 50–60 个字符。" }
+      - { label: "SEO 描述", name: "seo_description", widget: "text", required: false, hint: "请写 150–160 个字符，说明文章解决的问题和读者能获得的内容。" }
+      - { label: "正文", name: "body", widget: "markdown" }
+
+  - name: "faq_items"
+    label: "机场问题库"
+    folder: "content/faq"
+    create: true
+    slug: "{{slug}}"
+    filter: { field: "content_type", value: "faq_item" }
+    sortable_fields: ["weight", "title"]
+    summary: "#{{weight}} · {{title}}"
+    fields:
+      - { label: "内容类型", name: "content_type", widget: "hidden", default: "faq_item" }
+      - { label: "问题", name: "title", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string", pattern: ["^[a-z0-9-]+$", "仅使用小写英文、数字和短横线"] }
+      - { label: "分类", name: "category", widget: "select", options: [{ label: "基础概念", value: "basics" }, { label: "新手入门", value: "getting-started" }, { label: "订阅与客户端", value: "clients" }, { label: "节点与线路", value: "nodes" }, { label: "故障排查", value: "troubleshooting" }, { label: "流量与套餐", value: "plans" }, { label: "流媒体与 AI", value: "streaming-ai" }, { label: "选购与风险", value: "buying-risk" }] }
+      - { label: "分类内排序", name: "weight", widget: "number", value_type: "int", min: 1 }
+      - { label: "草稿", name: "draft", widget: "boolean", default: false }
+      - { label: "答案", name: "body", widget: "markdown", hint: "建议直接回答问题，并补充必要的判断方法或排查步骤。" }
+
+  - name: "blog"
+    label: "博客文章"
+    folder: "content/blog"
+    create: true
+    slug: "{{slug}}"
+    filter: { field: "content_type", value: "blog_post" }
+    sortable_fields: ["date", "title"]
+    fields:
+      - { label: "内容类型", name: "content_type", widget: "hidden", default: "blog_post" }
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "URL Slug", name: "slug", widget: "string", pattern: ["^[a-z0-9-]+$", "仅使用小写英文、数字和短横线"] }
+      - { label: "发布日期", name: "date", widget: "datetime" }
+      - { label: "文章分类", name: "category", widget: "select", default: "使用教程", options: ["机场评测", "使用教程", "机场动态"], hint: "每篇文章选择一个主分类。" }
+      - { label: "文章标签", name: "tags", widget: "select", multiple: true, required: false, options: ["新手入门", "免费试用", "套餐价格", "线路测速", "IEPL专线", "流媒体", "AI工具", "Clash", "Shadowrocket", "风险避坑"], hint: "可以多选，用于博客页标签筛选。" }
+      - { label: "摘要", name: "description", widget: "text" }
+      - { label: "草稿", name: "draft", widget: "boolean", default: false }
+      - { label: "SEO 标题", name: "seo_title", widget: "string", required: false, hint: "前台会自动加上｜机场库，最终标题必须为 50–60 个字符。" }
+      - { label: "SEO 描述", name: "seo_description", widget: "text", required: false, hint: "请写 150–160 个字符，避免与其他文章重复。" }
+      - { label: "Canonical", name: "canonical", widget: "string", required: false }
+      - { label: "OG 图片", name: "og_image", widget: "image", required: false }
+      - { label: "正文", name: "body", widget: "markdown" }
+
+  - name: "trust_pages"
+    label: "信任与说明页面"
+    files:
+      - name: "methodology"
+        label: "评测与核验方法"
+        file: "content/methodology.md"
+        fields:
+          - { label: "标题", name: "title", widget: "string" }
+          - { label: "发布日期", name: "date", widget: "datetime" }
+          - { label: "页面摘要", name: "description", widget: "text" }
+          - { label: "SEO 标题", name: "seo_title", widget: "string" }
+          - { label: "SEO 描述", name: "seo_description", widget: "text" }
+          - { label: "正文", name: "body", widget: "markdown" }
+
+      - name: "disclaimer"
+        label: "免责声明"
+        file: "content/disclaimer.md"
+        fields:
+          - { label: "标题", name: "title", widget: "string" }
+          - { label: "发布日期", name: "date", widget: "datetime" }
+          - { label: "页面摘要", name: "description", widget: "text" }
+          - { label: "SEO 标题", name: "seo_title", widget: "string" }
+          - { label: "SEO 描述", name: "seo_description", widget: "text" }
+          - { label: "正文", name: "body", widget: "markdown" }
+      - name: "contact"
+        label: "联系我们"
+        file: "content/contact.md"
+        fields:
+          - { label: "标题", name: "title", widget: "string" }
+          - { label: "发布日期", name: "date", widget: "datetime" }
+          - { label: "页面摘要", name: "description", widget: "text" }
+          - { label: "SEO 标题", name: "seo_title", widget: "string" }
+          - { label: "SEO 描述", name: "seo_description", widget: "text" }
+          - { label: "正文", name: "body", widget: "markdown" }
+
+  - name: "software_settings"
+    label: "软件下载"
+    files:
+      - name: "software"
+        label: "软件列表与安全提示"
+        file: "data/software.yaml"
+        fields:
+          - { label: "最后核验日期", name: "last_verified", widget: "string" }
+          - { label: "下载安全提示", name: "notice", widget: "text" }
+          - label: "软件列表"
+            name: "items"
+            widget: "list"
+            summary: "#{{fields.rank}} · {{fields.name}} · {{fields.license}}"
+            fields:
+              - { label: "软件名称", name: "name", widget: "string" }
+              - { label: "图标文字", name: "initial", widget: "string" }
+              - { label: "支持系统", name: "platforms", widget: "select", multiple: true, options: ["Windows", "macOS", "Linux", "Android", "iPhone", "iPad"] }
+              - { label: "适用订阅", name: "protocol", widget: "string" }
+              - { label: "授权方式", name: "license", widget: "string" }
+              - { label: "软件说明", name: "description", widget: "text" }
+              - { label: "官方下载地址", name: "url", widget: "string" }
+              - { label: "来源名称", name: "source_label", widget: "string" }
+              - { label: "标记为常用", name: "featured", widget: "boolean", default: false }
+              - { label: "排序", name: "rank", widget: "number", value_type: "int", min: 1 }

@@ -1,0 +1,31 @@
+{{ $title := .Params.seo_title | default .Title }}
+{{ if .IsHome }}{{ $title = .Params.seo_title | default site.Title }}{{ end }}
+{{ $desc := .Params.seo_description | default .Params.description | default site.Params.description }}
+{{ $fullTitle := $title }}
+{{ if not .IsHome }}{{ $fullTitle = printf "%s｜%s" $title site.Title }}{{ end }}
+{{ $titleLength := strings.RuneCount $fullTitle }}
+{{ $descLength := strings.RuneCount $desc }}
+{{ if or (lt $titleLength 50) (gt $titleLength 60) }}{{ warnf "SEO 标题建议为 50–60 个字符：%s（当前 %d 个字符）" .RelPermalink $titleLength }}{{ end }}
+{{ if or (lt $descLength 150) (gt $descLength 160) }}{{ warnf "SEO 描述建议为 150–160 个字符：%s（当前 %d 个字符）" .RelPermalink $descLength }}{{ end }}
+{{ $canonical := .Permalink | absURL }}
+{{ with .Params.canonical }}{{ $canonical = . | absURL }}{{ end }}
+{{ $image := .Params.og_image | default site.Params.defaultImage | absURL }}
+{{ $style := resources.Get "css/site.css" | minify | fingerprint }}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ $fullTitle }}</title>
+<meta name="description" content="{{ $desc }}">
+<link rel="canonical" href="{{ $canonical }}">
+<meta name="theme-color" content="#155eef">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/uploads/jichangku-logo-v4-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/uploads/jichangku-logo-v4-180.png">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:site_name" content="{{ site.Params.siteName }}">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ $canonical }}">
+<meta property="og:image" content="{{ $image }}">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+{{ with .OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .Permalink }}">{{ end }}

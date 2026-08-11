@@ -1,0 +1,94 @@
+{{ define "main" }}
+{{ $siteData := hugo.Data.site }}
+{{ $airports := where site.RegularPages "Section" "airports" }}
+{{ $airports = sort $airports "Params.rank" "asc" }}
+{{ $homeAirports := first 8 $airports }}
+{{ $trials := where $airports "Params.trial" true }}
+{{ $cheapest := index (sort $airports "Params.price" "asc") 0 }}
+{{ $latestBlogs := first 6 (sort (where site.RegularPages "Section" "blog") "Date" "desc") }}
+{{ $featured := $siteData.featured_airports }}
+{{ $quickBudget := site.GetPage (printf "/airports/%s" ($featured.quick_budget | default "mojie")) }}
+{{ $quickStable := site.GetPage (printf "/airports/%s" ($featured.quick_stable | default "huanyuyun")) }}
+{{ $quickBusiness := site.GetPage (printf "/airports/%s" ($featured.quick_business | default "wangjikuaiche")) }}
+{{ $scenarioAI := site.GetPage (printf "/airports/%s" ($featured.scenario_ai_media | default "huanyuyun")) }}
+{{ $scenarioBusiness := site.GetPage (printf "/airports/%s" ($featured.scenario_business | default "wangjikuaiche")) }}
+{{ $scenarioBudget := site.GetPage (printf "/airports/%s" ($featured.scenario_budget | default "mojie")) }}
+{{ $scenarioStability := site.GetPage (printf "/airports/%s" ($featured.scenario_stability | default "shanshuiyun")) }}
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">{{ $siteData.announcement }}</span>
+        <h1>{{ $siteData.hero_title }}<span>{{ $siteData.hero_emphasis }}</span></h1>
+        <p class="hero-copy">{{ $siteData.hero_description }}</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#scenarios">按需求看推荐</a>{{ with $siteData.tg_url }}<a class="btn btn-secondary" href="{{ . }}" target="_blank" rel="noopener">订阅 TG 频道</a>{{ else }}<button class="btn btn-secondary" type="button" data-toast="TG 频道即将开放">订阅 TG 频道</button>{{ end }}</div>
+        <p class="hero-channel-note"><strong>资料核验：</strong>{{ $siteData.last_verified }}　·　<a href="/methodology/">查看评测方法</a></p>
+      </div>
+      <aside class="quick-panel" aria-label="快速选择">
+        <div class="quick-panel-head"><div><h2>不知道怎么选？</h2><p>先按你的核心需求看三家</p></div><span class="quick-status"><i aria-hidden="true"></i>运行中</span></div>
+        <ul class="quick-list">
+          {{ with $quickBudget }}<li class="quick-item"><span><strong>稳定入门</strong><small>￥1 先验证连接</small></span><a class="quick-price" href="{{ .RelPermalink }}">{{ .Params.name }} {{ .Params.price_display }}</a></li>{{ end }}
+          {{ with $quickStable }}<li class="quick-item"><span><strong>全能稳定</strong><small>专线与 4K 解锁</small></span><a class="quick-price" href="{{ .RelPermalink }}">{{ .Params.name }} {{ .Params.price_display }}</a></li>{{ end }}
+          {{ with $quickBusiness }}<li class="quick-item"><span><strong>流量灵活</strong><small>不限时与日享可选</small></span><a class="quick-price" href="{{ .RelPermalink }}">{{ .Params.name }} {{ .Params.price_display }}</a></li>{{ end }}
+        </ul>
+      </aside>
+    </div>
+    <div class="stats" aria-label="网站数据">
+      <a class="stat" href="/airports/"><strong>{{ len $airports }} 家</strong><span>已收录机场</span><small>查看全部机场 <i aria-hidden="true">→</i></small></a>
+      <a class="stat" href="#free-trials"><strong>{{ len $trials }} 家</strong><span>支持免费试用</span><small>查看试用机场 <i aria-hidden="true">→</i></small></a>
+      <a class="stat" href="{{ $cheapest.RelPermalink }}"><strong>{{ $cheapest.Params.price_display }} 起</strong><span>当前最低价格</span><small>查看低价机场 <i aria-hidden="true">→</i></small></a>
+      <a class="stat" href="/blog/"><strong>持续更新</strong><span>价格与运营状态</span><small>查看最新动态 <i aria-hidden="true">→</i></small></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="airport-list">
+  <div class="container">
+    <div class="section-head"><div><span class="eyebrow">机场排行榜</span><h2>按需求快速做决定</h2><p>统一展示价格、协议、解锁与推荐分，减少反复跳转比较。</p></div><span class="text-link static-label">资料核验：{{ $siteData.last_verified }} · 价格以官网为准</span></div>
+    <div class="filters" aria-label="筛选机场">
+      <button class="filter active" type="button" data-filter="all">全部 {{ len $homeAirports }} 家</button><button class="filter" type="button" data-filter="trial">支持试用</button><button class="filter" type="button" data-filter="cheap">15 元以内</button><button class="filter" type="button" data-filter="premium">高端专线</button><button class="filter" type="button" data-filter="media">流媒体优先</button>
+    </div>
+    <div class="airport-table">
+      <div class="airport-head"><span>机场名称</span><span>核心协议</span><span>最低价格</span><span>解锁与特色</span><span>推荐分</span><span class="align-right">快速操作</span></div>
+      <div id="airport-rows">
+        {{ range $homeAirports }}{{ $airport := . }}
+        <article class="airport-row" data-trial="{{ .Params.trial }}" data-cheap="{{ le (float .Params.price) 15 }}" data-premium="{{ .Params.premium }}" data-media="{{ .Params.media }}">
+          <a class="airport-name airport-name-link" href="{{ .RelPermalink }}" aria-label="查看 {{ .Params.name }} 详情">{{ partial "airport-avatar.html" . }}<span><strong>{{ .Params.name }} {{ if .Params.trial }}<span class="badge badge-trial">可试用</span>{{ end }}</strong><small>{{ .Params.advantage }}</small></span></a>
+          <div class="protocol">{{ .Params.protocol }}</div><div class="price">{{ .Params.price_display }}<small>{{ with .Params.price_unit }} / {{ . }}{{ else }} / 月{{ end }}</small></div><div class="support">{{ .Params.streaming }}</div><div class="rating"><strong>{{ printf "%.1f" (float .Params.rating) }}</strong><small>推荐指数</small></div>
+          <div class="row-actions"><a class="btn btn-sm btn-secondary" href="{{ .RelPermalink }}">详情</a>{{ with .Params.website }}<a class="btn btn-sm {{ if $airport.Params.trial }}btn-trial{{ else }}btn-primary{{ end }}" href="{{ . }}" target="_blank" rel="nofollow sponsored noopener">官网</a>{{ else }}<button class="btn btn-sm {{ if $airport.Params.trial }}btn-trial{{ else }}btn-primary{{ end }}" type="button" data-toast="{{ $airport.Params.name }} 官网链接暂未收录">官网</button>{{ end }}</div>
+        </article>
+        {{ end }}
+      </div>
+      <div class="empty" id="empty-state" hidden>没有找到匹配的机场。</div>
+    </div>
+    <div class="airport-list-more"><a class="btn btn-secondary" href="/airports/">查看全部机场（共 {{ len $airports }} 家）</a></div>
+  </div>
+</section>
+
+<section class="section section-alt" id="guides">
+  <div class="container"><div class="section-head"><div><span class="eyebrow">快速决策</span><h2>三步选到适合你的机场</h2><p>先明确使用场景，再看线路与价格，最后短周期试用。</p></div></div>
+    <div class="decision-grid"><article class="decision-card"><span class="number">STEP 01</span><h3>先看你要解决什么</h3><p>AI、流媒体、外贸办公和日常浏览，对线路与原生 IP 的要求不同。</p><a class="text-link" href="#scenarios">按场景筛选</a></article><article class="decision-card"><span class="number">STEP 02</span><h3>再比较月费与协议</h3><p>同价位优先比较线路质量、流量倍率、设备限制与高峰期表现。</p><a class="text-link" href="#airport-list">查看排行榜</a></article><article class="decision-card"><span class="number">STEP 03</span><h3>优先试用或月付</h3><p>不要一开始就长期付费，先验证常用节点、解锁与晚高峰体验。</p><a class="text-link" href="#free-trials">查看试用机场</a></article></div>
+  </div>
+</section>
+
+<section class="section" id="free-trials"><div class="container"><div class="section-head"><div><span class="eyebrow">先试后买</span><h2>支持免费试用的机场</h2><p>先验证你常用的节点、网站与晚高峰表现，再决定是否购买。</p></div><a class="text-link" href="#airport-list" data-filter-link="trial">查看全部试用选项</a></div>
+  <div class="trial-grid">{{ range $trials }}<article class="trial-card"><div><span class="badge badge-trial">支持试用</span><h3>{{ .Params.name }}</h3><p>{{ .Params.summary }}</p><div class="trial-meta"><span class="meta-pill">{{ .Params.protocol }}</span><span class="meta-pill">{{ .Params.streaming }}</span><span class="meta-pill">{{ .Params.advantage }}</span></div></div><div class="trial-action"><strong>{{ .Params.price_display }}<small> / 月起</small></strong><a class="btn btn-trial" href="{{ .RelPermalink }}">查看试用详情</a></div></article>{{ end }}</div>
+</div></section>
+
+<section class="section section-alt" id="scenarios"><div class="container"><div class="section-head"><div><span class="eyebrow">按用途选</span><h2>不用记机场名，按你的场景直接选</h2><p>把复杂协议换成更容易判断的实际用途，缩短比较时间。</p></div></div>
+  <div class="scenario-grid">
+    {{ with $scenarioAI }}<a class="scenario-card" href="{{ .RelPermalink }}" aria-label="查看首推机场 {{ .Params.name }} 的推荐理由"><div class="scenario-copy"><span class="scenario-label">AI 与流媒体</span><h3>想要稳定看 4K、用海外 AI</h3><p>优先考虑专线质量与常用地区解锁能力。</p></div><div class="scenario-pick"><div class="scenario-pick-top">{{ partial "airport-avatar.html" . }}<div><span class="scenario-badge">首推</span><strong>{{ .Params.name }}</strong></div></div><div class="scenario-pick-bottom"><span class="scenario-price">{{ .Params.price_display }}<small>{{ with .Params.price_unit }} / {{ . }}{{ else }} / 月起{{ end }}</small></span><span class="scenario-reason">查看推荐理由</span></div></div></a>{{ end }}
+    {{ with $scenarioBusiness }}<a class="scenario-card" href="{{ .RelPermalink }}" aria-label="查看首推机场 {{ .Params.name }} 的推荐理由"><div class="scenario-copy"><span class="scenario-label">灵活流量</span><h3>低频轻量或每日高流量</h3><p>不限时流量包适合慢慢用，日享套餐适合每天稳定使用。</p></div><div class="scenario-pick"><div class="scenario-pick-top">{{ partial "airport-avatar.html" . }}<div><span class="scenario-badge">首推</span><strong>{{ .Params.name }}</strong></div></div><div class="scenario-pick-bottom"><span class="scenario-price">{{ .Params.price_display }}<small>{{ with .Params.price_unit }} / {{ . }}{{ else }} / 月起{{ end }}</small></span><span class="scenario-reason">查看推荐理由</span></div></div></a>{{ end }}
+    {{ with $scenarioBudget }}<a class="scenario-card" href="{{ .RelPermalink }}" aria-label="查看首推机场 {{ .Params.name }} 的推荐理由"><div class="scenario-copy"><span class="scenario-label">稳定入门</span><h3>先验证稳定，再按总流量购买</h3><p>先用低价体验包测试，再选择长期有效的不限时流量包。</p></div><div class="scenario-pick"><div class="scenario-pick-top">{{ partial "airport-avatar.html" . }}<div><span class="scenario-badge">首推</span><strong>{{ .Params.name }}</strong></div></div><div class="scenario-pick-bottom"><span class="scenario-price">{{ .Params.price_display }}<small>{{ with .Params.price_unit }} / {{ . }}{{ else }} / 月起{{ end }}</small></span><span class="scenario-reason">查看推荐理由</span></div></div></a>{{ end }}
+    {{ with $scenarioStability }}<a class="scenario-card" href="{{ .RelPermalink }}" aria-label="查看首推机场 {{ .Params.name }} 的推荐理由"><div class="scenario-copy"><span class="scenario-label">线路优化</span><h3>需要三网优化与多地区解锁</h3><p>可在普通中转直连和三网优化 Pro 线路之间按需求选择。</p></div><div class="scenario-pick"><div class="scenario-pick-top">{{ partial "airport-avatar.html" . }}<div><span class="scenario-badge">首推</span><strong>{{ .Params.name }}</strong></div></div><div class="scenario-pick-bottom"><span class="scenario-price">{{ .Params.price_display }}<small>{{ with .Params.price_unit }} / {{ . }}{{ else }} / 月起{{ end }}</small></span><span class="scenario-reason">查看推荐理由</span></div></div></a>{{ end }}
+  </div>
+</div></section>
+
+<section class="section" id="method"><div class="container"><div class="section-head"><div><span class="eyebrow">信息可信</span><h2>每一条推荐，都说明依据</h2><p>价格、试用状态和线路信息会定期复核，推荐内容与资料状态明确区分。</p></div></div><div class="trust-layout"><div class="method-list"><article class="method-item"><span class="method-number">01</span><div><h3>官网信息核对</h3><p>核对最低月费、核心协议、套餐限制和当前运营状态。</p></div></article><article class="method-item"><span class="method-number">02</span><div><h3>关键场景验证</h3><p>围绕常用地区、流媒体解锁与晚高峰体验整理信息。</p></div></article><article class="method-item"><span class="method-number">03</span><div><h3>试用优先展示</h3><p>能先体验再付款的机场会单独标注，降低首次选择风险。</p></div></article><article class="method-item"><span class="method-number">04</span><div><h3>购买风险提示</h3><p>明确说明试用、退款、客服与尚未独立测试的项目。</p></div></article></div><aside class="update-panel"><h3>最近核验</h3><p>价格、试用和运营状态会根据最新公开信息持续更新。</p><div class="update-row"><span>价格与套餐</span><strong>{{ $siteData.last_verified }}</strong></div><div class="update-row"><span>试用状态</span><strong>{{ len $trials }} 家可试用</strong></div><div class="update-row"><span>运营状态</span><strong>{{ len $airports }} 家正常展示</strong></div><div class="update-row"><span>更新提醒</span><strong>TG 频道同步</strong></div></aside></div></div></section>
+
+<section class="section" id="latest-guides"><div class="container"><div class="section-head"><div><span class="eyebrow">选购指南</span><h2>选机场前，先把关键问题弄清楚</h2><p>从免费试用、协议、流媒体、AI 到外贸办公，减少只看宣传词做决定。</p></div><a class="text-link" href="/guides/">查看全部指南</a></div><div class="home-guide-grid">{{ range first 6 (where site.RegularPages "Section" "guides") }}<article><span>{{ .Date.Format "2006-01-02" }}</span><h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3><p>{{ .Params.description }}</p><a class="text-link" href="{{ .RelPermalink }}">阅读全文</a></article>{{ end }}</div></div></section>
+
+<section class="section home-blog-section" id="latest-blog"><div class="container"><div class="section-head"><div><span class="eyebrow">最新发布</span><h2>机场选购与使用文章</h2><p>持续更新试用方法、线路判断、流媒体、AI 与日常使用经验。</p></div><a class="text-link" href="/blog/">查看全部博客</a></div>{{ if gt (len $latestBlogs) 0 }}<div class="home-blog-grid">{{ range $latestBlogs }}<article><a class="home-blog-card" href="{{ .RelPermalink }}"><div class="home-blog-meta"><span>{{ .Params.category | default "机场知识" }}</span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time></div><h3>{{ .Title }}</h3><p>{{ .Params.description }}</p><strong>阅读全文 <span aria-hidden="true">→</span></strong></a></article>{{ end }}</div>{{ else }}<div class="home-blog-empty"><h3>更多实用文章即将发布</h3><p>我们将持续更新机场选购、节点测试和客户端使用经验。</p><a class="btn btn-secondary" href="/blog/">进入博客</a></div>{{ end }}</div></section>
+
+<section class="section section-alt" id="faq"><div class="container"><div class="faq-layout"><div class="faq-intro"><span class="eyebrow">购买前必看</span><h2>常见问题</h2><p>把第一次选择机场最容易卡住的问题，提前讲清楚。</p><a class="btn btn-secondary" href="/faq/">进入问题库</a></div><div class="faq-list"><details open><summary>第一次买机场，应该先看什么？</summary><p>先确定主要用途和预算，再优先选择支持试用或月付的机场。</p></details><details><summary>专线、Trojan、V2Ray 有什么区别？</summary><p>协议名称不是唯一判断标准，还要结合线路质量、地区、设备支持和用途。</p></details><details><summary>为什么推荐先试用，不直接买年付？</summary><p>不同网络环境体验差异很大，短周期试用可以降低选错成本。</p></details><details><summary>页面价格和官网不一致怎么办？</summary><p>最终以机场官网为准，机场库会显示最近核验时间并同步重要变化。</p></details></div></div><div class="final-cta"><div><h3>还没决定？先看本期推荐榜</h3><p>从综合推荐或免费试用开始，通常 3 分钟内就能缩小到 1–2 个选项。</p></div><div class="final-cta-actions"><a class="btn btn-secondary" href="#airport-list">查看推荐榜</a>{{ with $siteData.tg_url }}<a class="btn btn-secondary" href="{{ . }}" target="_blank" rel="noopener">订阅 TG 频道</a>{{ else }}<button class="btn btn-secondary" type="button" data-toast="TG 频道即将开放">订阅 TG 频道</button>{{ end }}</div></div></div></section>
+{{ end }}

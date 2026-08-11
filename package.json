@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "hugo server -D --disableFastRender",
+    "cms": "decap-server",
+    "build": "hugo --gc --minify"
+  },
+  "devDependencies": {
+    "decap-server": "^3.9.0"
+  }
+}

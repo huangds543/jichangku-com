@@ -1,0 +1,53 @@
+last_verified: "2026-08-07"
+notice: "仅收录开发者官网、官方 GitHub 仓库或应用商店页面。下载前请再次核对开发者名称与发布来源。"
+items:
+  - name: "Clash Verge Rev"
+    initial: "CV"
+    platforms: ["Windows", "macOS", "Linux"]
+    protocol: "Clash / Mihomo 订阅"
+    license: "开源免费"
+    description: "界面清晰的桌面客户端，适合使用 Clash/Mihomo 格式订阅的用户。"
+    url: "https://github.com/clash-verge-rev/clash-verge-rev/releases"
+    source_label: "GitHub 官方发布页"
+    featured: true
+    rank: 1
+  - name: "v2rayN"
+    initial: "VN"
+    platforms: ["Windows", "macOS", "Linux"]
+    protocol: "Xray / sing-box 等"
+    license: "开源免费"
+    description: "支持多种协议和核心的桌面客户端，功能较完整，适合需要更多设置的用户。"
+    url: "https://github.com/2dust/v2rayN/releases"
+    source_label: "GitHub 官方发布页"
+    featured: true
+    rank: 2
+  - name: "v2rayNG"
+    initial: "NG"
+    platforms: ["Android"]
+    protocol: "V2Ray / Xray"
+    license: "开源免费"
+    description: "Android 常用客户端，适合导入 V2Ray/Xray 兼容订阅。"
+    url: "https://github.com/2dust/v2rayNG/releases"
+    source_label: "GitHub 官方发布页"
+    featured: true
+    rank: 3
+  - name: "Hiddify"
+    initial: "HD"
+    platforms: ["Windows", "macOS", "Linux", "Android", "iPhone", "iPad"]
+    protocol: "sing-box / Xray / Clash"
+    license: "开源免费"
+    description: "跨平台客户端，支持多种订阅与现代协议，适合希望多设备保持一致体验的用户。"
+    url: "https://github.com/hiddify/hiddify-app/releases"
+    source_label: "GitHub 官方发布页"
+    featured: true
+    rank: 4
+  - name: "Shadowrocket"
+    initial: "SR"
+    platforms: ["iPhone", "iPad"]
+    protocol: "SS / Trojan / V2Ray 等"
+    license: "付费软件"
+    description: "iPhone 与 iPad 常用规则代理工具，通过 App Store 购买和安装。"
+    url: "https://apps.apple.com/us/app/shadowrocket/id932747118"
+    source_label: "Apple App Store"
+    featured: false
+    rank: 5

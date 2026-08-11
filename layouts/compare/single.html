@@ -1,0 +1,26 @@
+{{ define "main" }}
+{{ $airports := where site.RegularPages "Section" "airports" }}
+{{ $airports = sort $airports "Params.rank" "asc" }}
+<section class="page-hero compare-hero"><div class="container"><div class="breadcrumb"><a href="/">首页</a><span>/</span><span>机场对比</span></div><span class="eyebrow">横向比较</span><h1>把候选机场放在一起看</h1><p>最多选择 3 家，重点比较价格、协议、试用、流媒体和适用场景。</p></div></section>
+<section class="section compare-page" data-compare-page>
+  <div class="container">
+    <div class="compare-selector-head"><div><h2>选择对比机场</h2><p>已选择 <strong id="compare-page-count">0</strong>/3 家；选满两家后优先展示结论</p></div><div><button class="text-button" type="button" data-compare-expand hidden>更换或添加</button><button class="text-button" type="button" data-compare-clear>清空选择</button></div></div>
+    <div class="compare-selector">
+      {{ range $airports }}<button class="compare-option" type="button" data-compare-toggle="{{ .File.ContentBaseName }}" data-compare-name="{{ .Params.name }}" data-price="{{ .Params.price }}" data-rating="{{ .Params.rating }}" data-trial="{{ .Params.trial }}" data-media="{{ .Params.media }}" data-premium="{{ .Params.premium }}">{{ partial "airport-avatar.html" . }}<span><strong>{{ .Params.name }}</strong><small>{{ .Params.price_display }} / 月起</small></span><span class="compare-check">＋</span></button>{{ end }}
+    </div>
+    <div class="compare-empty" id="compare-empty"><strong>还没有选择机场</strong><p>从上方选择 2–3 家，即可查看价格、协议和适用场景差异。</p></div>
+    <section class="compare-verdicts" id="compare-verdicts" hidden aria-live="polite"><div class="compare-verdict-head"><span class="eyebrow">快速结论</span><h2>先看差异，再看完整参数</h2></div><div class="compare-verdict-grid" id="compare-verdict-grid"></div></section>
+    <div class="compare-results" id="compare-results">
+      {{ range $airports }}{{ $airport := . }}<article class="compare-card" data-compare-card="{{ .File.ContentBaseName }}" hidden>
+        <div class="compare-card-head"><a class="airport-name airport-name-link" href="{{ .RelPermalink }}" aria-label="查看 {{ .Params.name }} 详情">{{ partial "airport-avatar.html" . }}<span><strong>{{ .Params.name }}</strong><small>{{ .Params.advantage }}</small></span></a><button class="compare-remove" type="button" data-compare-toggle="{{ .File.ContentBaseName }}" data-compare-name="{{ .Params.name }}" aria-label="移除 {{ .Params.name }}">×</button></div>
+        <div class="compare-price">{{ .Params.price_display }}<small>{{ with .Params.price_unit }} / {{ . }}{{ else }} / 月起{{ end }}</small></div>
+        <dl class="compare-specs"><div><dt>推荐指数</dt><dd>{{ printf "%.1f" (float .Params.rating) }} / 5</dd></div><div><dt>核心协议</dt><dd>{{ .Params.protocol }}</dd></div><div><dt>免费试用</dt><dd>{{ if .Params.trial }}<span class="yes">支持</span>{{ else }}暂不支持{{ end }}</dd></div><div><dt>流媒体</dt><dd>{{ .Params.streaming }}</dd></div><div><dt>适合人群</dt><dd>{{ .Params.best_for }}</dd></div><div><dt>运营状态</dt><dd>{{ .Params.status }}</dd></div></dl>
+        <div class="compare-summary"><strong>综合评价</strong><p>{{ .Params.summary }}</p></div>
+        <ul class="compare-pros">{{ range first 3 .Params.pros }}<li>{{ . }}</li>{{ end }}</ul>
+        <div class="compare-card-actions"><a class="btn btn-secondary" href="{{ .RelPermalink }}">查看详情</a>{{ with .Params.website }}<a class="btn {{ if $airport.Params.trial }}btn-trial{{ else }}btn-primary{{ end }}" href="{{ . }}" target="_blank" rel="nofollow sponsored noopener">官网</a>{{ else }}<button class="btn {{ if $airport.Params.trial }}btn-trial{{ else }}btn-primary{{ end }}" type="button" data-toast="{{ $airport.Params.name }} 官网链接暂未收录">官网</button>{{ end }}</div>
+      </article>{{ end }}
+    </div>
+    <div class="compare-tip"><strong>怎么做决定？</strong><p>优先排除不支持你核心用途的机场，再比较月费和试用条件。第一次购买建议先试用或月付，不建议直接长期付费。</p></div>
+  </div>
+</section>
+{{ end }}
