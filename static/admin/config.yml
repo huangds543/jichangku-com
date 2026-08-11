@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: jichangku/jichangku-com
+  repo: huangds543/jichangku-com
   branch: main
   base_url: https://jichangku.com
   auth_endpoint: api/auth
