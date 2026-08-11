@@ -33,6 +33,19 @@ collections:
           - { label: "Telegram 频道链接", name: "tg_url", widget: "string", required: false, hint: "留空时前台显示即将开放提示" }
           - { label: "TG 推送说明", name: "tg_note", widget: "string" }
           - { label: "页脚免责声明", name: "legal_notice", widget: "text" }
+          - label: "站长统计代码"
+            name: "analytics_code"
+            widget: "text"
+            required: false
+            hint: "粘贴可信统计平台提供的完整官方代码；留空时不加载。保存后会在全站前台生效，后台管理页面不会加载。"
+          - label: "统计代码加载位置"
+            name: "analytics_position"
+            widget: "select"
+            default: "footer"
+            options:
+              - { label: "页尾加载（推荐）", value: "footer" }
+              - { label: "页面 Head 中加载", value: "head" }
+            hint: "除非统计平台明确要求放在 Head 中，否则建议保持页尾加载。"
           - label: "首页机场推荐位"
             name: "featured_airports"
             widget: "object"

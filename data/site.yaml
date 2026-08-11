@@ -6,6 +6,8 @@ last_verified: 2026-08-07
 tg_url: ""
 tg_note: 试用更新、优惠变化、机场异常与跑路预警
 legal_notice: 本站仅提供机场信息整理与选择参考，不提供代理服务。套餐、价格与可用性可能调整，请以机场官网为准。
+analytics_position: "footer"
+analytics_code: ""
 featured_airports:
   quick_budget: mojie
   quick_stable: huanyuyun

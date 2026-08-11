@@ -29,3 +29,6 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
 {{ with .OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .Permalink }}">{{ end }}
+{{ $analyticsCode := site.Data.site.analytics_code | default "" }}
+{{ $analyticsPosition := site.Data.site.analytics_position | default "footer" }}
+{{ if and $analyticsCode (eq $analyticsPosition "head") }}{{ $analyticsCode | safeHTML }}{{ end }}
