@@ -1,12 +1,17 @@
 {{ $title := .Params.seo_title | default .Title }}
 {{ if .IsHome }}{{ $title = .Params.seo_title | default site.Title }}{{ end }}
 {{ $desc := .Params.seo_description | default .Params.description | default site.Params.description }}
+{{ $is404 := eq .Kind "404" }}
+{{ if $is404 }}
+  {{ $title = "页面未找到" }}
+  {{ $desc = "你访问的页面不存在或地址已经发生变化。可以返回机场库首页、浏览机场大全，或前往博客查看机场评测、使用教程与机场动态。" }}
+{{ end }}
 {{ $fullTitle := $title }}
 {{ if not .IsHome }}{{ $fullTitle = printf "%s｜%s" $title site.Title }}{{ end }}
 {{ $titleLength := strings.RuneCount $fullTitle }}
 {{ $descLength := strings.RuneCount $desc }}
-{{ if or (lt $titleLength 50) (gt $titleLength 60) }}{{ warnf "SEO 标题建议为 50–60 个字符：%s（当前 %d 个字符）" .RelPermalink $titleLength }}{{ end }}
-{{ if or (lt $descLength 150) (gt $descLength 160) }}{{ warnf "SEO 描述建议为 150–160 个字符：%s（当前 %d 个字符）" .RelPermalink $descLength }}{{ end }}
+{{ if and (not $is404) (or (lt $titleLength 50) (gt $titleLength 60)) }}{{ warnf "SEO 标题建议为 50–60 个字符：%s（当前 %d 个字符）" .RelPermalink $titleLength }}{{ end }}
+{{ if and (not $is404) (or (lt $descLength 150) (gt $descLength 160)) }}{{ warnf "SEO 描述建议为 150–160 个字符：%s（当前 %d 个字符）" .RelPermalink $descLength }}{{ end }}
 {{ $canonical := .Permalink | absURL }}
 {{ with .Params.canonical }}{{ $canonical = . | absURL }}{{ end }}
 {{ $image := .Params.og_image | default site.Params.defaultImage | absURL }}
@@ -15,6 +20,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ $fullTitle }}</title>
 <meta name="description" content="{{ $desc }}">
+{{ if $is404 }}<meta name="robots" content="noindex,nofollow,noarchive">{{ end }}
 <link rel="canonical" href="{{ $canonical }}">
 <meta name="theme-color" content="#155eef">
 <link rel="icon" href="/favicon.ico" sizes="any">
