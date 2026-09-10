@@ -174,7 +174,7 @@ collections:
       - { label: "排序", name: "rank", widget: "number", value_type: "int", min: 1 }
       - { label: "机场 LOGO", name: "logo", widget: "image", required: false, hint: "可上传 PNG、WebP、JPG、SVG 或 ICO；建议使用正方形透明背景图片。未上传时显示下方头像文字。" }
       - { label: "头像文字", name: "initial", widget: "string", hint: "未上传 LOGO 或图片加载失败时显示，建议填写机场名称的首字。" }
-      - { label: "运营状态", name: "status", widget: "select", options: ["正常运营", "暂停注册", "维护中", "疑似失联", "已停止运营"] }
+      - { label: "运营状态", name: "status", widget: "select", options: ["正常运营", "暂停注册", "维护中", "疑似失联", "已停止运营"], hint: "只有正常运营的机场会进入首页推荐、正常榜单和对比页；其他状态会移入机场大全的风险记录。" }
       - { label: "核心协议", name: "protocol", widget: "string" }
       - { label: "最低月费数字", name: "price", widget: "number", value_type: "float", min: 0 }
       - { label: "价格显示", name: "price_display", widget: "string", hint: "例如：￥15.00" }
@@ -186,7 +186,7 @@ collections:
       - { label: "支持试用", name: "trial", widget: "boolean", default: false }
       - { label: "高端专线", name: "premium", widget: "boolean", default: false }
       - { label: "流媒体优先", name: "media", widget: "boolean", default: false }
-      - { label: "官网/注册链接", name: "website", widget: "string", required: false }
+      - { label: "官网/注册链接", name: "website", widget: "string", required: false, hint: "疑似失联或已停止运营时请清空，前台将撤下购买入口。" }
       - { label: "试用说明", name: "trial_note", widget: "string", required: false }
       - label: "套餐列表"
         name: "plans"

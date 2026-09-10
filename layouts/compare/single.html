@@ -1,5 +1,6 @@
 {{ define "main" }}
 {{ $airports := where site.RegularPages "Section" "airports" }}
+{{ $airports = where $airports "Params.status" "正常运营" }}
 {{ $airports = sort $airports "Params.rank" "asc" }}
 <section class="page-hero compare-hero"><div class="container"><div class="breadcrumb"><a href="/">首页</a><span>/</span><span>机场对比</span></div><span class="eyebrow">横向比较</span><h1>把候选机场放在一起看</h1><p>最多选择 3 家，重点比较价格、协议、试用、流媒体和适用场景。</p></div></section>
 <section class="section compare-page" data-compare-page>

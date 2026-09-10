@@ -1,6 +1,7 @@
 {{ define "main" }}
 {{ $siteData := hugo.Data.site }}
-{{ $airports := where site.RegularPages "Section" "airports" }}
+{{ $allAirports := where site.RegularPages "Section" "airports" }}
+{{ $airports := where $allAirports "Params.status" "正常运营" }}
 {{ $airports = sort $airports "Params.rank" "asc" }}
 {{ $homeAirports := first 8 $airports }}
 {{ $trials := where $airports "Params.trial" true }}
@@ -8,9 +9,9 @@
 {{ $latestBlogs := first 6 (sort (where site.RegularPages "Section" "blog") "Date" "desc") }}
 {{ $featured := $siteData.featured_airports }}
 {{ $quickBudget := site.GetPage (printf "/airports/%s" ($featured.quick_budget | default "mojie")) }}
-{{ $quickStable := site.GetPage (printf "/airports/%s" ($featured.quick_stable | default "huanyuyun")) }}
+{{ $quickStable := site.GetPage (printf "/airports/%s" ($featured.quick_stable | default "xingdaomeng")) }}
 {{ $quickBusiness := site.GetPage (printf "/airports/%s" ($featured.quick_business | default "wangjikuaiche")) }}
-{{ $scenarioAI := site.GetPage (printf "/airports/%s" ($featured.scenario_ai_media | default "huanyuyun")) }}
+{{ $scenarioAI := site.GetPage (printf "/airports/%s" ($featured.scenario_ai_media | default "skylumo")) }}
 {{ $scenarioBusiness := site.GetPage (printf "/airports/%s" ($featured.scenario_business | default "wangjikuaiche")) }}
 {{ $scenarioBudget := site.GetPage (printf "/airports/%s" ($featured.scenario_budget | default "mojie")) }}
 {{ $scenarioStability := site.GetPage (printf "/airports/%s" ($featured.scenario_stability | default "shanshuiyun")) }}
@@ -34,7 +35,7 @@
       </aside>
     </div>
     <div class="stats" aria-label="网站数据">
-      <a class="stat" href="/airports/"><strong>{{ len $airports }} 家</strong><span>已收录机场</span><small>查看全部机场 <i aria-hidden="true">→</i></small></a>
+      <a class="stat" href="/airports/"><strong>{{ len $allAirports }} 家</strong><span>已收录机场</span><small>含运营状态记录 <i aria-hidden="true">→</i></small></a>
       <a class="stat" href="#free-trials"><strong>{{ len $trials }} 家</strong><span>支持免费试用</span><small>查看试用机场 <i aria-hidden="true">→</i></small></a>
       <a class="stat" href="{{ $cheapest.RelPermalink }}"><strong>{{ $cheapest.Params.price_display }} 起</strong><span>当前最低价格</span><small>查看低价机场 <i aria-hidden="true">→</i></small></a>
       <a class="stat" href="/blog/"><strong>持续更新</strong><span>价格与运营状态</span><small>查看最新动态 <i aria-hidden="true">→</i></small></a>
@@ -61,7 +62,7 @@
       </div>
       <div class="empty" id="empty-state" hidden>没有找到匹配的机场。</div>
     </div>
-    <div class="airport-list-more"><a class="btn btn-secondary" href="/airports/">查看全部机场（共 {{ len $airports }} 家）</a></div>
+    <div class="airport-list-more"><a class="btn btn-secondary" href="/airports/">查看全部正常运营机场（共 {{ len $airports }} 家）</a></div>
   </div>
 </section>
 

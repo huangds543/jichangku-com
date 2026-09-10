@@ -1,9 +1,11 @@
 {{ define "main" }}
-{{ $airports := sort .Pages "Params.rank" "asc" }}
+{{ $allAirports := sort .Pages "Params.rank" "asc" }}
+{{ $airports := where $allAirports "Params.status" "正常运营" }}
+{{ $archived := where $allAirports "Params.status" "ne" "正常运营" }}
 {{ $trials := where $airports "Params.trial" true }}
-<section class="page-hero catalog-hero"><div class="container"><div class="breadcrumb"><a href="/">首页</a><span>/</span><span>机场大全</span></div><span class="eyebrow">机场资料库</span><h1>机场大全</h1><p>{{ .Params.description }}</p><div class="catalog-overview"><span><strong>{{ len $airports }}</strong> 家已收录</span><span><strong>{{ len $trials }}</strong> 家支持试用</span><span>价格、试用和状态定期核验</span><span><a class="text-link" href="/methodology/">查看核验方法</a></span></div></div></section>
+<section class="page-hero catalog-hero"><div class="container"><div class="breadcrumb"><a href="/">首页</a><span>/</span><span>机场大全</span></div><span class="eyebrow">机场资料库</span><h1>机场大全</h1><p>{{ .Params.description }}</p><div class="catalog-overview"><span><strong>{{ len $allAirports }}</strong> 家已收录</span><span><strong>{{ len $airports }}</strong> 家正常运营</span><span><strong>{{ len $trials }}</strong> 家支持试用</span><span><a class="text-link" href="/methodology/">查看核验方法</a></span></div></div></section>
 <section class="section catalog-section"><div class="container">
-  <div class="section-head catalog-list-head"><div><h2>机场服务一览</h2><p>按价格、线路、解锁与使用场景快速筛选，点击机场名称或详情查看完整评测。</p></div><span class="text-link static-label">资料核验后再跳转购买</span></div>
+  <div class="section-head catalog-list-head"><div><h2>正常运营机场</h2><p>按价格、线路、解锁与使用场景快速筛选，点击机场名称或详情查看完整评测。</p></div><span class="text-link static-label">资料核验后再跳转官网</span></div>
   <div class="filters" aria-label="筛选机场"><button class="filter active" type="button" data-filter="all">全部 {{ len $airports }} 家</button><button class="filter" type="button" data-filter="trial">支持试用</button><button class="filter" type="button" data-filter="cheap">15 元以内</button><button class="filter" type="button" data-filter="premium">高端专线</button><button class="filter" type="button" data-filter="media">流媒体优先</button></div>
   <div class="catalog-table">
     <div class="catalog-table-head"><span>机场</span><span>最低价格</span><span>核心协议</span><span>流媒体支持</span><span>推荐</span><span>适合用途</span><span class="align-right">快速操作</span></div>
@@ -15,10 +17,19 @@
         <div class="catalog-cell catalog-streaming" data-label="流媒体">{{ .Params.streaming }}</div>
         <div class="catalog-cell catalog-rating" data-label="推荐指数"><strong>{{ printf "%.1f" (float .Params.rating) }}</strong><small>/ 5</small></div>
         <div class="catalog-cell catalog-purpose" data-label="适合用途">{{ .Params.best_for }}</div>
-        <div class="catalog-row-actions"><a class="btn btn-sm btn-secondary" href="{{ .RelPermalink }}">详情</a>{{ with .Params.website }}<a class="btn btn-sm {{ if $airport.Params.trial }}btn-trial{{ else }}btn-primary{{ end }}" href="{{ . }}" target="_blank" rel="nofollow sponsored noopener">官网</a>{{ else }}<button class="btn btn-sm {{ if $airport.Params.trial }}btn-trial{{ else }}btn-primary{{ end }}" type="button" data-toast="{{ $airport.Params.name }} 官网链接暂未收录">官网</button>{{ end }}</div>
+        <div class="catalog-row-actions"><a class="btn btn-sm btn-secondary" href="{{ .RelPermalink }}">详情</a>{{ with .Params.website }}<a class="btn btn-sm {{ if $airport.Params.trial }}btn-trial{{ else }}btn-primary{{ end }}" href="{{ . }}" target="_blank" rel="nofollow sponsored noopener">官网</a>{{ end }}</div>
       </article>{{ end }}
     </div>
     <div class="empty" id="empty-state" hidden>没有找到匹配的机场。</div>
   </div>
+
+  {{ if gt (len $archived) 0 }}
+  <section class="airport-archive" aria-labelledby="airport-archive-title">
+    <div class="section-head catalog-list-head"><div><span class="eyebrow eyebrow-danger">风险记录</span><h2 id="airport-archive-title">停止运营与异常记录</h2><p>保留历史页面用于状态查询与风险提醒，以下机场不再参与推荐和对比。</p></div></div>
+    <div class="archive-list">
+      {{ range $archived }}<a class="archive-item" href="{{ .RelPermalink }}"><span>{{ partial "airport-avatar.html" . }}</span><span><strong>{{ .Params.name }}</strong><small>最后更新 {{ .Params.updated }}</small></span><span class="badge badge-danger">{{ .Params.status }}</span><b>查看风险提醒 →</b></a>{{ end }}
+    </div>
+  </section>
+  {{ end }}
 </div></section>
 {{ end }}
