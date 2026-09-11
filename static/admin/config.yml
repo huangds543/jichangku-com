@@ -176,9 +176,9 @@ collections:
       - { label: "头像文字", name: "initial", widget: "string", hint: "未上传 LOGO 或图片加载失败时显示，建议填写机场名称的首字。" }
       - { label: "运营状态", name: "status", widget: "select", options: ["正常运营", "暂停注册", "维护中", "疑似失联", "已停止运营"], hint: "只有正常运营的机场会进入首页推荐、正常榜单和对比页；其他状态会移入机场大全的风险记录。" }
       - { label: "核心协议", name: "protocol", widget: "string" }
-      - { label: "最低月费数字", name: "price", widget: "number", value_type: "float", min: 0 }
-      - { label: "价格显示", name: "price_display", widget: "string", hint: "例如：￥15.00" }
-      - { label: "最低价格单位", name: "price_unit", widget: "string", required: false, hint: "月付套餐可留空；一次性不限时套餐填写：一次性" }
+      - { label: "最低月付价格数字", name: "price", widget: "number", value_type: "float", min: 0, hint: "统一填写可按月购买的最低套餐价格，不使用年付折算价。" }
+      - { label: "最低月付价格显示", name: "price_display", widget: "string", hint: "例如：￥15.00。统一展示最低月付套餐价格，年付价格只写入套餐列表。" }
+      - { label: "最低价格单位", name: "price_unit", widget: "string", required: false, hint: "月付套餐必须留空，前台会自动显示“/ 月起”；仅无月付套餐时填写：一次性。" }
       - { label: "流媒体支持", name: "streaming", widget: "string" }
       - { label: "特色优势", name: "advantage", widget: "string" }
       - { label: "综合评价", name: "summary", widget: "text", hint: "显示位置：详情页标题下方、下方综合评价模块以及对比页综合评价。" }
