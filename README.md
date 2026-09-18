@@ -24,3 +24,13 @@ npm.cmd run cms
 - 指南文章：`content/guides/`
 - 首页与友情链接：`data/site.yaml`
 - 后台配置：`static/admin/config.yml`
+
+## 免费节点每日更新时间
+
+免费节点页面的更新时间由 Hugo 构建时自动生成，并固定使用北京时间。宝塔计划任务每天执行一次下面的命令，即使 GitHub 没有新提交也会强制重新构建，并同步更新站点地图中的免费节点 `lastmod`：
+
+```bash
+cd /www/wwwroot/jichangku && FORCE_BUILD=true bash scripts/bt-sync-indexnow.sh
+```
+
+建议计划任务每天 `00:10` 执行。

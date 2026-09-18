@@ -137,7 +137,7 @@ collections:
           - { label: "页面类型", name: "type", widget: "hidden", default: "free-node" }
           - { label: "页面布局", name: "layout", widget: "hidden", default: "single" }
           - { label: "发布日期", name: "date", widget: "datetime" }
-          - { label: "最后更新日期", name: "updated", widget: "string", hint: "例如：2026-08-09" }
+          - { label: "兼容日期（前台自动更新）", name: "updated", widget: "string", hint: "前台不使用此值；页面会在宝塔每日构建时自动显示北京时间。" }
           - { label: "更新状态", name: "update_status", widget: "string", hint: "例如：今日已更新" }
           - { label: "页面介绍", name: "description", widget: "text" }
           - { label: "SEO 标题", name: "seo_title", widget: "string", hint: "前台会自动加上｜机场库，最终标题建议保持 50–60 个字符。" }

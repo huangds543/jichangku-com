@@ -2,6 +2,7 @@ baseURL: "https://jichangku.com/"
 relativeURLs: false
 title: "机场库"
 locale: "zh-CN"
+timeZone: "Asia/Shanghai"
 defaultContentLanguage: "zh-cn"
 hasCJKLanguage: true
 enableRobotsTXT: true

@@ -1,5 +1,6 @@
 {{ define "main" }}
 {{ $siteData := hugo.Data.site }}
+{{ $buildUpdated := now.Format "2006-01-02 15:04" }}
 {{ $primary := site.GetPage (printf "/airports/%s" .Params.primary_airport) }}
 {{ $secondary := site.GetPage (printf "/airports/%s" .Params.secondary_airport) }}
 <section class="free-node-hero">
@@ -11,7 +12,7 @@
       <p>{{ .Params.description }}</p>
       <div class="free-node-status-row">
         <span class="free-node-status"><i aria-hidden="true"></i>{{ .Params.update_status }}</span>
-        <span>更新于 {{ .Params.updated }}</span>
+        <span>更新于 {{ $buildUpdated }}</span>
       </div>
     </div>
     <aside class="free-node-channel">
@@ -30,7 +31,7 @@
   </section>
 
   <section class="free-node-section" aria-labelledby="today-free-node">
-    <div class="section-head free-node-section-head"><div><span class="eyebrow">今天的订阅</span><h2 id="today-free-node">每日更新订阅链接</h2><p>导入一次后，可在客户端中刷新订阅。不同客户端请选择对应格式。</p></div><span class="verification-date">{{ .Params.update_status }} · {{ .Params.updated }}</span></div>
+    <div class="section-head free-node-section-head"><div><span class="eyebrow">今天的订阅</span><h2 id="today-free-node">每日更新订阅链接</h2><p>导入一次后，可在客户端中刷新订阅。不同客户端请选择对应格式。</p></div><span class="verification-date">{{ .Params.update_status }} · {{ $buildUpdated }}</span></div>
     <div class="subscription-grid">
       <article class="subscription-card">
         <div class="subscription-card-head"><span class="subscription-icon">通</span><div><h3>通用订阅</h3><p>小火箭 / v2rayN / v2rayNG</p></div></div>
