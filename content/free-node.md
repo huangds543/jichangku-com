@@ -10,7 +10,7 @@ seo_title: 每日免费节点订阅更新｜Clash、V2Ray、小火箭通用链�
 seo_description: 机场库每日整理公开免费节点订阅，提供
   Clash、V2Ray、小火箭通用链接、备用入口与一键复制，并说明客户端导入步骤、失效原因、隐私风险和使用注意事项。页面还比较免费节点与付费机场在稳定性、晚高峰速度、流媒体、AI
   工具和客服方面的差异，帮助你先应急使用，再判断是否需要选择支持试用或月付的稳定机场。
-universal_url: https://ghfast.top/https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/v.txt
+universal_url: https://cdn.jsdelivr.net/gh/free18/v2ray@main/c.yaml
 clash_url: https://ghfast.top/https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml
 backup_universal_url: ""
 backup_clash_url: ""
