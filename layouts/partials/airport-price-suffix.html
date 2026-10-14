@@ -1,0 +1,7 @@
+{{- $page := .page -}}
+{{- $monthly := .monthly | default "月起" -}}
+{{- with $page.Params.price_note -}}
+ / 月 · {{ . }}
+{{- else -}}
+  {{- with $page.Params.price_unit -}} / {{ . }}{{- else -}} / {{ $monthly }}{{- end -}}
+{{- end -}}

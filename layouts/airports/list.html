@@ -12,7 +12,7 @@
     <div id="airport-rows">
       {{ range $airports }}{{ $airport := . }}<article class="catalog-table-row airport-row" data-trial="{{ .Params.trial }}" data-cheap="{{ le (float .Params.price) 15 }}" data-premium="{{ .Params.premium }}" data-media="{{ .Params.media }}">
         <a class="airport-name airport-name-link catalog-airport-name" href="{{ .RelPermalink }}" aria-label="查看 {{ .Params.name }} 详情">{{ partial "airport-avatar.html" . }}<span><strong>{{ .Params.name }} {{ if .Params.trial }}<span class="badge badge-trial">可试用</span>{{ end }}</strong><small>{{ .Params.advantage }}</small></span></a>
-        <div class="catalog-cell catalog-price" data-label="最低价格"><strong>{{ .Params.price_display }}</strong><small>{{ with .Params.price_unit }}/ {{ . }}{{ else }}/ 月起{{ end }}</small></div>
+        <div class="catalog-cell catalog-price" data-label="最低价格"><strong>{{ .Params.price_display }}</strong><small>{{ partial "airport-price-suffix.html" (dict "page" . "monthly" "月起") }}</small></div>
         <div class="catalog-cell catalog-protocol" data-label="核心协议">{{ .Params.protocol }}</div>
         <div class="catalog-cell catalog-streaming" data-label="流媒体">{{ .Params.streaming }}</div>
         <div class="catalog-cell catalog-rating" data-label="推荐指数"><strong>{{ printf "%.1f" (float .Params.rating) }}</strong><small>/ 5</small></div>

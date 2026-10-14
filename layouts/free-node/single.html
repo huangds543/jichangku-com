@@ -71,7 +71,7 @@
     <div class="section-head"><div><span class="eyebrow">从免费到稳定</span><h2 id="stable-airports">免费节点不够用时，可以先月付或试用</h2><p>先选短周期验证常用节点和晚高峰表现，不建议第一次就长期付费。</p></div><a class="text-link" href="/airports/">查看全部机场</a></div>
     <div class="node-recommend-grid">
       {{ range $index, $airport := slice $primary $secondary }}{{ with $airport }}<article>
-        <div class="node-recommend-head">{{ partial "airport-avatar.html" . }}<div><span>{{ if eq $index 0 }}稳定推荐{{ else }}试用推荐{{ end }}</span><h3><a href="{{ .RelPermalink }}">{{ .Params.name }}</a></h3></div><strong>{{ .Params.price_display }}<small> / 月起</small></strong></div>
+        <div class="node-recommend-head">{{ partial "airport-avatar.html" . }}<div><span>{{ if eq $index 0 }}稳定推荐{{ else }}试用推荐{{ end }}</span><h3><a href="{{ .RelPermalink }}">{{ .Params.name }}</a></h3></div><strong>{{ .Params.price_display }}<small>{{ partial "airport-price-suffix.html" (dict "page" . "monthly" "月起") }}</small></strong></div>
         <p>{{ .Params.summary }}</p>
         <div class="node-recommend-tags"><span>{{ .Params.protocol }}</span><span>{{ .Params.streaming }}</span>{{ if .Params.trial }}<span>支持试用</span>{{ end }}</div>
         <div class="node-recommend-actions"><a class="btn btn-secondary" href="{{ .RelPermalink }}">查看详情</a>{{ with .Params.website }}<a class="btn btn-primary" href="{{ . }}" target="_blank" rel="nofollow sponsored noopener">官网</a>{{ end }}</div>
