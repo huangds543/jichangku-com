@@ -19,7 +19,7 @@ premium: false
 media: true
 website: "https://goflybit.com/register?code=05oWLoklQu"
 verification_type: "官网与公开套餐资料核对"
-test_status: "套餐资料已核验，暂未进行独立测速"
+test_status: "套餐资料已核验；已录入演示测速数据，建议使用 2GB 试用自行测试"
 trial_note: "提供 2GB 免费测试体验，建议先验证本地网络、常用节点、流媒体和 ChatGPT 后再购买"
 refund_note: "套餐页面明确标注不支持退款，购买前请先完成试用并核对周期与流量规则"
 support_note: "套餐页面提示试用遇到问题可提交工单，其他客服支持以用户中心为准"
@@ -44,22 +44,22 @@ plans:
     price: "￥52.00 / 月"
     quota: "每月 512 GB"
     validity: "不限速、50 台设备；季付 ￥148、半年付 ￥260、年付 ￥498；重置流量 ￥42"
-  - category: "不限时流量包"
+  - category: "永久流量包"
     name: "不限时-128G"
     price: "￥36.00"
     quota: "128 GB 不限时流量"
     validity: "永久有效、不限速、不限设备，支持家庭成员共享"
-  - category: "不限时流量包"
+  - category: "永久流量包"
     name: "不限时-256G"
     price: "￥68.00"
     quota: "256 GB 不限时流量"
     validity: "永久有效、不限速、不限设备，支持家庭成员共享"
-  - category: "不限时流量包"
+  - category: "永久流量包"
     name: "不限时-512G"
     price: "￥128.00"
     quota: "512 GB 不限时流量"
     validity: "永久有效、不限速、不限设备，支持家庭成员共享"
-  - category: "不限时流量包"
+  - category: "永久流量包"
     name: "不限时-1024G"
     price: "￥238.00"
     quota: "1 TB（1024 GB）不限时流量"
@@ -69,6 +69,25 @@ plans:
     price: "￥0.00"
     quota: "2 GB"
     validity: "不限速、不限设备；具体领取方式与有效期以注册后的用户中心为准"
+speed_test:
+  is_demo: true
+  date: "2026-10-28"
+  period: "晚高峰 20:30"
+  environment: "Clash Verge Rev 示例环境"
+  tool: "演示数据（非独立实测）"
+  nodes:
+    - name: "香港节点"
+      latency: 42
+      download: 71.8
+      packet_loss: 0
+    - name: "日本东京节点"
+      latency: 76
+      download: 58.4
+      packet_loss: 0
+    - name: "美国洛杉矶节点"
+      latency: 156
+      download: 32.7
+      packet_loss: 0.2
 best_for: "希望先免费试用、需要多设备共享，或想在月付套餐与不限时流量包之间灵活选择的用户"
 purchase_advice: "先领取 2GB 测试体验，验证常用节点、晚高峰、流媒体和 ChatGPT；确认适合后再从 ￥15 的 128GB 月付开始。使用频率不固定可比较 128GB 至 1TB 不限时流量包。"
 pros:
