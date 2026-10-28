@@ -88,6 +88,37 @@ speed_test:
       latency: 156
       download: 32.7
       packet_loss: 0.2
+unlock_test:
+  is_demo: true
+  date: "2026-10-28"
+  node: "香港节点（演示）"
+  tool: "演示数据（非独立实测）"
+  note: "官网套餐仅标注支持流媒体与 ChatGPT；以下为页面展示用演示数据，不代表 Flybit 当前真实解锁结果。请使用 2GB 免费试用，在自己的网络和目标节点上逐项验证。"
+  items:
+    - category: "AI 工具"
+      platform: "ChatGPT"
+      status: "unlocked"
+    - category: "AI 工具"
+      platform: "Claude"
+      status: "region"
+    - category: "AI 工具"
+      platform: "Gemini"
+      status: "untested"
+    - category: "流媒体"
+      platform: "Netflix"
+      status: "unlocked"
+    - category: "流媒体"
+      platform: "Disney+"
+      status: "region"
+    - category: "流媒体"
+      platform: "YouTube"
+      status: "unlocked"
+    - category: "流媒体"
+      platform: "TikTok"
+      status: "unlocked"
+    - category: "流媒体"
+      platform: "Spotify"
+      status: "unlocked"
 best_for: "希望先免费试用、需要多设备共享，或想在月付套餐与不限时流量包之间灵活选择的用户"
 purchase_advice: "先领取 2GB 测试体验，验证常用节点、晚高峰、流媒体和 ChatGPT；确认适合后再从 ￥15 的 128GB 月付开始。使用频率不固定可比较 128GB 至 1TB 不限时流量包。"
 pros:
