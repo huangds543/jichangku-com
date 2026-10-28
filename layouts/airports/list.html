@@ -1,5 +1,6 @@
 {{ define "main" }}
 {{ $allAirports := sort .Pages "Params.rank" "asc" }}
+{{ $allAirports = where $allAirports "Params.slug" "ne" "skylumo" }}
 {{ $airports := where $allAirports "Params.status" "正常运营" }}
 {{ $archived := where $allAirports "Params.status" "ne" "正常运营" }}
 {{ $trials := where $airports "Params.trial" true }}
