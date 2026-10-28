@@ -4,7 +4,7 @@ name: "Flybit"
 slug: "flybit"
 date: 2026-10-28
 updated: 2026-10-28
-rank: 10
+rank: 6
 initial: "F"
 status: "正常运营"
 protocol: "VLESS / Secure 隧道"

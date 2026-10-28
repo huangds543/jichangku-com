@@ -24,7 +24,7 @@ draft: false
 | 外贸与商务办公 | 原生 IP、线路稳定、售后 | 最低月费 |
 | 多设备家庭使用 | 设备限制、流量、客户端支持 | 套餐宣传词 |
 
-如果只是低成本入门，可以先看[魔戒](/airports/mojie/)；希望先体验再决定，可以比较[SKYLUMO](/airports/skylumo/)和[拼好连](/airports/pinhaolian/)；外贸办公可重点核对[网际快车](/airports/wangjikuaiche/)的 IP 与售后规则。
+如果只是低成本入门，可以先看[魔戒](/airports/mojie/)；希望先体验再决定，可以比较[Flybit](/airports/flybit/)和[拼好连](/airports/pinhaolian/)；外贸办公可重点核对[网际快车](/airports/wangjikuaiche/)的 IP 与售后规则。
 
 ## 第二步：确定可以接受的预算
 

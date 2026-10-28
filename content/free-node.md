@@ -17,7 +17,7 @@ backup_clash_url: ""
 source_note: 节点来自公开网络资源整理，仅用于临时应急和学习测试，不保证可用性、速度与安全性。
 tg_heading: 订阅 TG，接收节点更新与机场异常提醒
 primary_airport: xingdaomeng
-secondary_airport: skylumo
+secondary_airport: flybit
 warnings:
   - 免费节点可能随时失效、速度较慢或在晚高峰拥堵，仅适合临时应急。
   - 不要通过未知免费节点登录网银、支付账户、工作后台或其他重要账号。

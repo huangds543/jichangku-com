@@ -6,7 +6,7 @@ name: SKYLUMO
 slug: skylumo
 date: 2026-08-07
 updated: 2026-08-10
-rank: 6
+rank: 10
 initial: S
 status: 正常运营
 protocol: 暂未核验
