@@ -18,4 +18,4 @@ draft: false
 
 ## 解锁结果会变化
 
-流媒体平台会调整识别策略，因此详情页的解锁信息需要定期核验。可以优先查看[星岛梦](/airports/xingdaomeng/)、[Flybit](/airports/flybit/)等流媒体定位候选，再结合自己的网络试用。
+流媒体平台会调整识别策略，因此详情页的解锁信息需要定期核验。可以优先查看[红杏云](/airports/hongxingyun/)、[Flybit](/airports/flybit/)等流媒体定位候选，再结合自己的网络试用。

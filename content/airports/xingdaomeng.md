@@ -4,7 +4,7 @@ name: "星岛梦"
 slug: "xingdaomeng"
 date: 2026-08-07
 updated: "2026-08-10"
-rank: 2
+rank: 5
 initial: "星"
 status: "正常运营"
 protocol: "全 IEPL / IPLC 专线"

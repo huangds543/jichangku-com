@@ -10,7 +10,7 @@
 {{ $latestBlogs := first 6 (sort (where site.RegularPages "Section" "blog") "Date" "desc") }}
 {{ $featured := $siteData.featured_airports }}
 {{ $quickBudget := site.GetPage (printf "/airports/%s" ($featured.quick_budget | default "mojie")) }}
-{{ $quickStable := site.GetPage (printf "/airports/%s" ($featured.quick_stable | default "xingdaomeng")) }}
+{{ $quickStable := site.GetPage (printf "/airports/%s" ($featured.quick_stable | default "hongxingyun")) }}
 {{ $quickBusiness := site.GetPage (printf "/airports/%s" ($featured.quick_business | default "wangjikuaiche")) }}
 {{ $scenarioAI := site.GetPage (printf "/airports/%s" ($featured.scenario_ai_media | default "flybit")) }}
 {{ $scenarioBusiness := site.GetPage (printf "/airports/%s" ($featured.scenario_business | default "wangjikuaiche")) }}
